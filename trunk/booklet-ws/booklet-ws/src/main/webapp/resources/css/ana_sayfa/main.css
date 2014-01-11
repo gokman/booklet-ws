@@ -1,0 +1,58 @@
+body {
+  background-color:#E7EFEF;
+}
+
+body.genel div#anadiv{
+
+width:1000px;
+background-color:#FFFFFF;
+height:auto;
+margin-left:auto;
+margin-right:auto;
+margin-top:30px;
+padding:10px;
+}
+
+.menudiv{
+
+margin-top:1px;
+margin-bottom:10px;
+
+}
+
+.orta_div{
+
+width:100%;
+
+}
+
+.orta_div_sol{
+
+width:20%;
+float:left;
+height:auto;
+margin-left:auto;
+margin-right:auto;
+
+}
+
+.orta_div_sag{
+
+width:100%;
+float:right;
+height:auto;
+margin-left:auto;
+margin-right:auto;
+padding-top: 20px;
+padding-bottom: 40px;
+
+}
+
+div#sayfa_baslik{
+
+	font-size: 25px;
+	font-family: Verdana;
+	font-weight: 700;
+	color: #666666;
+
+}
