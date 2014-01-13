@@ -29,6 +29,15 @@ class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
     <property name="annotatedClasses">
 		<list>
 		<value>org.springframework.samples.mvc.basic.model.Sample</value>	
+		<value>com.fagose.booklet.model.Action</value>
+		<value>com.fagose.booklet.model.ActionTypes</value>
+		<value>com.fagose.booklet.model.Book</value>
+		<value>com.fagose.booklet.model.BookLike</value>
+		<value>com.fagose.booklet.model.Comment</value>
+		<value>com.fagose.booklet.model.FollowShip</value>
+		<value>com.fagose.booklet.model.Hashtag</value>
+		<value>com.fagose.booklet.model.User</value>
+		<value>com.fagose.booklet.model.Userroles</value>
 		</list>
     </property>
  
