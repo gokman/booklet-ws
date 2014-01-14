@@ -25,6 +25,7 @@ public class User implements java.io.Serializable {
 	private String about;
 	private Date creationDate;
 	private Date lastUpdateDate;
+	private Integer enabled;
 
 	public User() {
 	}
@@ -100,6 +101,15 @@ public class User implements java.io.Serializable {
 
 	public void setLastUpdateDate(Date lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;
+	}
+	
+	@Column(name = "Enabled")
+	public Integer getEnabled() {
+		return this.enabled;
+	}
+
+	public void setEnabled(Integer enabled) {
+		this.enabled = enabled;
 	}
 
 }
