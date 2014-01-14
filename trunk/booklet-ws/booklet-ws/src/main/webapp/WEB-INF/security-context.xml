@@ -13,17 +13,20 @@
         
  <http auto-config="true">
      
-   <intercept-url pattern="/services/sample/*" access="ROLE_SAMPLE"/>
-     
+   <intercept-url pattern="/services/sample/*" access="ROLE_ADMIN"/>
+   <logout logout-url="/logout" />
  </http>
-  
+ 
  <authentication-manager>
-     <authentication-provider>
-         
-         <user-service>
-             <user name="gokman" password="sample" authorities="ROLE_SAMPLE" />
-         </user-service>
-     </authentication-provider>
+     
+    <authentication-provider>
+        
+	<jdbc-user-service data-source-ref="dataSource"
+	users-by-username-query="select UserName,Password,Enabled from User where UserName=?"
+	authorities-by-username-query="select u.UserName, a.roleName from User u, userroles a where a.UserID = u.UserID and u.UserName =? " />
+	
+	</authentication-provider>
+	
  </authentication-manager>
 
 
