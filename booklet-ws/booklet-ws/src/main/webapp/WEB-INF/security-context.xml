@@ -13,8 +13,9 @@
         
  <http auto-config="true">
      
-   <intercept-url pattern="/services/sample/*" access="ROLE_ADMIN"/>
-   <logout logout-url="/logout" />
+   <intercept-url pattern="/services/sample/list" access="ROLE_ADMIN"/>
+   <intercept-url pattern="/services/sample/listJson" access="ROLE_ADMIN"/>
+   <logout logout-url="/logout"  />
  </http>
  
  <authentication-manager>
