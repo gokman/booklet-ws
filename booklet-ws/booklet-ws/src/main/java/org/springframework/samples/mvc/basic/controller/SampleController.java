@@ -43,7 +43,6 @@ public class SampleController{
 	 public Sample addPerson(@RequestBody Sample sample) {
 	     
 	     sampleService.addSample(sample);
-	     
 	     return sample;
 	    }
 }
