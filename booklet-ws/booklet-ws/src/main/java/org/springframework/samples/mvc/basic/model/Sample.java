@@ -15,6 +15,11 @@ public class Sample  {
 	public Sample(){
 		
 	}
+	
+	public Sample(Long sampleId,String sampleName){
+		this.sampleId=sampleId;
+		this.sampleName=sampleName;
+	}
 
 private Long sampleId;
 private String sampleName;
