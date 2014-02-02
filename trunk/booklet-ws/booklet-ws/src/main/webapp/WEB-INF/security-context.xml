@@ -12,9 +12,9 @@
         http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd">
         
  <http auto-config="true">     
- <!-- <intercept-url pattern="/services/sample/list" access="ROLE_ADMIN"/>
+   <intercept-url pattern="/services/sample/list" access="ROLE_ADMIN"/>
    <intercept-url pattern="/services/sample/listJson" access="ROLE_ADMIN"/>  
-   <intercept-url pattern="/services/sample/addSample" access="ROLE_ADMIN"/>-->
+   <intercept-url pattern="/services/sample/addSample" access="ROLE_ADMIN"/>
    <logout logout-url="/logout"  />
  </http>
  
