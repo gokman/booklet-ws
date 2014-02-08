@@ -30,7 +30,6 @@ class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
 		<list>
 		<value>org.springframework.samples.mvc.basic.model.Sample</value>	
 		<value>com.fagose.booklet.model.Action</value>
-		<value>com.fagose.booklet.model.ActionTypes</value>
 		<value>com.fagose.booklet.model.Book</value>
 		<value>com.fagose.booklet.model.BookLike</value>
 		<value>com.fagose.booklet.model.Comment</value>

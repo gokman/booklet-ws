@@ -2,8 +2,13 @@ package com.fagose.booklet.model;
 // default package
 // Generated Jan 13, 2014 10:33:06 PM by Hibernate Tools 3.4.0.CR1
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,32 +19,31 @@ import javax.persistence.Table;
 @Table(name = "Action", catalog = "booklet")
 public class Action implements java.io.Serializable {
 
-	private int actionSeqId;
+	private ActionType actionType;
 	private Integer userId;
 	private Integer actionId;
 
 	public Action() {
 	}
 
-	public Action(int actionSeqId) {
-		this.actionSeqId = actionSeqId;
-	}
 
-	public Action(int actionSeqId, Integer userId, Integer actionId) {
-		this.actionSeqId = actionSeqId;
+	public Action(ActionType actionType, Integer userId, Integer actionId) {
+		this.actionType = actionType;
 		this.userId = userId;
 		this.actionId = actionId;
 	}
 
-	@Id
-	@Column(name = "ActionSeqID", unique = true, nullable = false)
-	public int getActionSeqId() {
-		return this.actionSeqId;
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "ActionType")
+	public ActionType getActionType() {
+		return actionType;
 	}
 
-	public void setActionSeqId(int actionSeqId) {
-		this.actionSeqId = actionSeqId;
+
+	public void setActionType(ActionType actionType) {
+		this.actionType = actionType;
 	}
+
 
 	@Column(name = "UserID")
 	public Integer getUserId() {
@@ -49,7 +53,8 @@ public class Action implements java.io.Serializable {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "ActionID")
 	public Integer getActionId() {
 		return this.actionId;
