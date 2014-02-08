@@ -16,44 +16,39 @@ import javax.persistence.Table;
 @Table(name = "Hashtag", catalog = "booklet")
 public class Hashtag implements java.io.Serializable {
 
-	private Integer hashTagId;
-	private Integer bookId;
+	private Long hashTagId;
+	private Long bookId;
 	private String tag;
-	private Integer bookAdderId;
-	private int bookBookId;
 
 	public Hashtag() {
 	}
 
-	public Hashtag(int bookBookId) {
-		this.bookBookId = bookBookId;
+	public Hashtag(Long bookId) {
+		this.bookId = bookId;
 	}
 
-	public Hashtag(Integer bookId, String tag, Integer bookAdderId,
-			int bookBookId) {
+	public Hashtag(Long bookId, String tag) {
 		this.bookId = bookId;
 		this.tag = tag;
-		this.bookAdderId = bookAdderId;
-		this.bookBookId = bookBookId;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "hashTagID", unique = true, nullable = false)
-	public Integer getHashTagId() {
+	public Long getHashTagId() {
 		return this.hashTagId;
 	}
 
-	public void setHashTagId(Integer hashTagId) {
+	public void setHashTagId(Long hashTagId) {
 		this.hashTagId = hashTagId;
 	}
 
 	@Column(name = "bookID")
-	public Integer getBookId() {
+	public Long  getBookId() {
 		return this.bookId;
 	}
 
-	public void setBookId(Integer bookId) {
+	public void setBookId(Long bookId) {
 		this.bookId = bookId;
 	}
 
@@ -65,23 +60,4 @@ public class Hashtag implements java.io.Serializable {
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
-
-	@Column(name = "bookAdderID")
-	public Integer getBookAdderId() {
-		return this.bookAdderId;
-	}
-
-	public void setBookAdderId(Integer bookAdderId) {
-		this.bookAdderId = bookAdderId;
-	}
-
-	@Column(name = "Book_BookID", nullable = false)
-	public int getBookBookId() {
-		return this.bookBookId;
-	}
-
-	public void setBookBookId(int bookBookId) {
-		this.bookBookId = bookBookId;
-	}
-
 }
