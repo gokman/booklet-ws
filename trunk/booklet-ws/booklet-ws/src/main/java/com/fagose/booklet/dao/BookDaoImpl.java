@@ -69,7 +69,7 @@ public class BookDaoImpl implements BookDao {
 		List<BookLike> resultList = null;
 		
 		if(searchriteria.getAdderId()!=null){
-			crit.add(Expression.eq("adderId", searchriteria.getAdderId()));
+			crit.add(Expression.eq("bookLikerId", searchriteria.getAdderId()));
 		}
 		if(searchriteria.getBookId()!=null){
 			crit.add(Expression.eq("bookId", searchriteria.getBookId()));

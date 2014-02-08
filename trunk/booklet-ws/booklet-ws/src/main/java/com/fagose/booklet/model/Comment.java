@@ -19,18 +19,18 @@ import javax.persistence.TemporalType;
 @Table(name = "Comment", catalog = "booklet")
 public class Comment implements java.io.Serializable {
 
-	private Integer commentId;
-	private Integer commenterId;
+	private Long commentId;
+	private Long commenterId;
 	private String commentText;
-	private Integer commentedBookId;
-	private Integer commentedBookAdderId;
+	private Long commentedBookId;
+	private Long commentedBookAdderId;
 	private Date creationDate;
 
 	public Comment() {
 	}
 
-	public Comment(Integer commenterId, String commentText,
-			Integer commentedBookId, Integer commentedBookAdderId,
+	public Comment(Long commenterId, String commentText,
+			Long commentedBookId, Long commentedBookAdderId,
 			Date creationDate) {
 		this.commenterId = commenterId;
 		this.commentText = commentText;
@@ -42,20 +42,20 @@ public class Comment implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "CommentID", unique = true, nullable = false)
-	public Integer getCommentId() {
+	public Long getCommentId() {
 		return this.commentId;
 	}
 
-	public void setCommentId(Integer commentId) {
+	public void setCommentId(Long commentId) {
 		this.commentId = commentId;
 	}
 
 	@Column(name = "CommenterID")
-	public Integer getCommenterId() {
+	public Long getCommenterId() {
 		return this.commenterId;
 	}
 
-	public void setCommenterId(Integer commenterId) {
+	public void setCommenterId(Long commenterId) {
 		this.commenterId = commenterId;
 	}
 
@@ -69,20 +69,20 @@ public class Comment implements java.io.Serializable {
 	}
 
 	@Column(name = "CommentedBookID")
-	public Integer getCommentedBookId() {
+	public Long getCommentedBookId() {
 		return this.commentedBookId;
 	}
 
-	public void setCommentedBookId(Integer commentedBookId) {
+	public void setCommentedBookId(Long commentedBookId) {
 		this.commentedBookId = commentedBookId;
 	}
 
 	@Column(name = "CommentedBookAdderID")
-	public Integer getCommentedBookAdderId() {
+	public Long getCommentedBookAdderId() {
 		return this.commentedBookAdderId;
 	}
 
-	public void setCommentedBookAdderId(Integer commentedBookAdderId) {
+	public void setCommentedBookAdderId(Long commentedBookAdderId) {
 		this.commentedBookAdderId = commentedBookAdderId;
 	}
 
