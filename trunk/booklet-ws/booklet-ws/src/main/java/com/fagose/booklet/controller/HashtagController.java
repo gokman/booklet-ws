@@ -36,7 +36,16 @@ public class HashtagController{
 		return hashtagList;
  
 	}
-	
+
+	@RequestMapping(value="/LIST_BY_TEXT/{tag}", method = RequestMethod.GET)
+	public @ResponseBody List<Hashtag> getTags(@PathVariable String tag) throws IOException {
+ 
+		SearchCriteria searchCriteria= new SearchCriteria();
+		searchCriteria.setTag(tag);
+		List<Hashtag> hashtagList = hashtagService.listHashtags(searchCriteria);
+		return hashtagList;
+ 
+	}	
 	@RequestMapping(value = "/ADD", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Hashtag> addHashtag(@RequestBody List<Hashtag> hashtags) {

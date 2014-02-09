@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.MatchMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -38,6 +39,10 @@ public class HashtagDaoImpl implements HashtagDao {
 		if(searchriteria.getBookId()!=null){
 			crit.add(Expression.eq("bookId", searchriteria.getBookId()));
 		}
+		if(searchriteria.getTag()!=null){
+			crit.add(Expression.like("tag", searchriteria.getTag(),MatchMode.ANYWHERE));
+		}
+		
 		resultList = crit.list();
 		
 		return resultList; 
