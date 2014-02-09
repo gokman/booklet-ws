@@ -59,9 +59,9 @@ public class BookController{
 	}
 	
 	
-	@RequestMapping(value = "/list")
+	@RequestMapping(value = "/LIST",method = RequestMethod.POST)
 	@ResponseBody	
-	public List<Book> listBooks(HttpServletRequest req,@ModelAttribute("searchCriteria")SearchCriteria searchCriteria) {
+	public List<Book> listBooks(@RequestBody SearchCriteria searchCriteria) {
 		List <Book> books = bookService.listBook(searchCriteria);
 		
 		return books;		

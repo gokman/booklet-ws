@@ -1,12 +1,22 @@
 package com.fagose.booklet.to;
 
+import java.util.List;
+
 public class SearchCriteria {
 	
 	private Long bookId;
 	private String name;
 	private Long adderId;
 	private String writer;
+	private String tag;
+	private List<Long> bookIdList;
 	
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 	public Long getBookId() {
 		return bookId;
 	}
@@ -30,6 +40,12 @@ public class SearchCriteria {
 	}
 	public void setWriter(String writer) {
 		this.writer = writer;
+	}
+	public List<Long> getBookIdList() {
+		return bookIdList;
+	}
+	public void setBookIdList(List<Long> bookIdList) {
+		this.bookIdList = bookIdList;
 	}
 	
 	

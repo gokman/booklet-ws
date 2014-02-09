@@ -26,21 +26,23 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Book> listBook(SearchCriteria searchriteria) {
+	public List<Book> listBook(SearchCriteria sc) {
 		Criteria crit =sessionFactory.getCurrentSession().createCriteria(Book.class);
 		List<Book> resultList = null;
 		
-		if(searchriteria.getAdderId()!=null){
-			crit.add(Expression.eq("adderId", searchriteria.getAdderId()));
+		if(sc.getAdderId()!=null){
+			crit.add(Expression.eq("adderId", sc.getAdderId()));
 		}
-		if(searchriteria.getBookId()!=null){
-			crit.add(Expression.eq("bookId", searchriteria.getBookId()));
+		if(sc.getBookId()!=null){
+			crit.add(Expression.eq("bookId", sc.getBookId()));
+		}else if(sc.getBookIdList()!=null &&sc.getBookIdList().size()>0){
+			crit.add(Expression.in("bookId", sc.getBookIdList()));
 		}
-		if(searchriteria.getName()!=null){
-			crit.add(Expression.eq("name", searchriteria.getName()));
+		if(sc.getName()!=null){
+			crit.add(Expression.eq("name", sc.getName()));
 		}
-		if(searchriteria.getWriter()!=null){
-			crit.add(Expression.eq("writer", searchriteria.getWriter()));
+		if(sc.getWriter()!=null){
+			crit.add(Expression.eq("writer", sc.getWriter()));
 		}
 		resultList = crit.list();
 		
