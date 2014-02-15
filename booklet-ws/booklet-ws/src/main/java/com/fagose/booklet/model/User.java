@@ -2,12 +2,17 @@ package com.fagose.booklet.model;
 // default package
 // Generated Jan 13, 2014 10:33:06 PM by Hibernate Tools 3.4.0.CR1
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,10 +22,33 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "User", catalog = "booklet")
-public class User implements java.io.Serializable {
+public class User{
 
-	private UserId id;
+	private long userId;
+	private String userEmail;
 	private String userName;
+	
+	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "UserID", unique = true, nullable = false)
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+	@Column(name = "UserEmail", length = 50)
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
 	private String password;
 	private String about;
 	private Date creationDate;
@@ -30,13 +58,14 @@ public class User implements java.io.Serializable {
 	public User() {
 	}
 
-	public User(UserId id) {
-		this.id = id;
+	public User(long id) {
+		this.userId = id;
 	}
 
-	public User(UserId id, String userName, String password, String about,
-			Date creationDate, Date lastUpdateDate) {
-		this.id = id;
+	public User(long id, String userName, String password, String about,
+			Date creationDate, Date lastUpdateDate,String userEmail) {
+		this.userId = id;
+		this.userEmail=userEmail;
 		this.userName = userName;
 		this.password = password;
 		this.about = about;
@@ -44,17 +73,6 @@ public class User implements java.io.Serializable {
 		this.lastUpdateDate = lastUpdateDate;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "userId", column = @Column(name = "UserID", nullable = false)),
-			@AttributeOverride(name = "userEmail", column = @Column(name = "UserEmail", nullable = false, length = 50)) })
-	public UserId getId() {
-		return this.id;
-	}
-
-	public void setId(UserId id) {
-		this.id = id;
-	}
 
 	@Column(name = "UserName", length = 45)
 	public String getUserName() {
