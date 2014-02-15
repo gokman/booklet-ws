@@ -8,5 +8,8 @@ public interface SampleService {
         public void addSample(Sample sample);
 
         public List<Sample> listSample();
+        
+        public void deleteSample(Long id);
+        public void deleteSample2(Sample sample);
 }
 

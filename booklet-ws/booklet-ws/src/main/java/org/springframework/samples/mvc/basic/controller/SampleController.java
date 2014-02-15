@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,4 +46,34 @@ public class SampleController{
 	     sampleService.addSample(sample);
 	     return sample;
 	    }
+	
+	@RequestMapping(value = "/deleteSample/{id}",
+	           method = RequestMethod.DELETE)
+	 @ResponseBody
+	 public String deletePerson(@PathVariable("id") Long id) {
+	     
+	     sampleService.deleteSample(id);
+	     return "dene";
+	    }
+	
+	@RequestMapping(value = "/deleteSample2",
+	           method = RequestMethod.DELETE)
+	 @ResponseBody
+	 public String deletePerson2() {
+	
+	    Sample sample1 = new Sample((long)25,"name");
+	    sample1.setSampleSurname("surname");
+	    
+	    sampleService.deleteSample2(sample1);
+	 
+	    return "dene";
+	}
+	
+	@RequestMapping(value="/j_spring_security_check", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Sample> login(ModelMap model) {
+		
+		return sampleService.listSample();
+	}
+	
 }
