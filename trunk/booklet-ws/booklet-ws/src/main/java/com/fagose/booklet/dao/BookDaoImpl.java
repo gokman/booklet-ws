@@ -2,9 +2,12 @@ package com.fagose.booklet.dao;
 
 import java.util.List;
 
+import com.fagose.booklet.util.ApplicationUtils;
+import com.fagose.booklet.util.ApplicationUtils.*;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -43,6 +46,17 @@ public class BookDaoImpl implements BookDao {
 		}
 		if(sc.getWriter()!=null){
 			crit.add(Expression.eq("writer", sc.getWriter()));
+		}
+		crit.setMaxResults(sc.getPageSize());
+		crit.setFirstResult(sc.getPageSize()*sc.getPageNumber());
+		if(sc.getOrderByCrit()!=null){
+			if(sc.getOrderByDrc()!=null && sc.getOrderByDrc().equals(ApplicationUtils.ORDER_BY_DIRECTION_DESCENDING)){
+				crit.addOrder(Order.desc(sc.getOrderByCrit()));	
+			}else{
+				crit.addOrder(Order.asc(sc.getOrderByCrit()));
+			}
+			
+	
 		}
 		resultList = crit.list();
 		
