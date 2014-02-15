@@ -4,6 +4,8 @@ package com.fagose.booklet.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -20,14 +22,15 @@ import javax.persistence.Table;
 public class Action implements java.io.Serializable {
 
 	private ActionType actionType;
-	private Integer userId;
-	private Integer actionId;
-
+	private Long userId;
+	private Long actionId;
+	private Date actionDate;
+	
 	public Action() {
 	}
 
 
-	public Action(ActionType actionType, Integer userId, Integer actionId) {
+	public Action(ActionType actionType, Long userId, Long actionId) {
 		this.actionType = actionType;
 		this.userId = userId;
 		this.actionId = actionId;
@@ -46,22 +49,32 @@ public class Action implements java.io.Serializable {
 
 
 	@Column(name = "UserID")
-	public Integer getUserId() {
+	public Long  getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long  userId) {
 		this.userId = userId;
 	}
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "ActionID")
-	public Integer getActionId() {
+	public Long  getActionId() {
 		return this.actionId;
 	}
 
-	public void setActionId(Integer actionId) {
+	public void setActionId(Long  actionId) {
 		this.actionId = actionId;
+	}
+
+	@Column(name="ActionDate")
+	public Date getActionDate() {
+		return actionDate;
+	}
+
+
+	public void setActionDate(Date actionDate) {
+		this.actionDate = actionDate;
 	}
 
 }
