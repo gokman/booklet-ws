@@ -11,6 +11,9 @@ public interface SampleDao {
        
         // To get list of all samples
         public List<Sample> listSample();
+        
+        public void deleteSample(Long id);
+        public void deleteSample2(Sample sample);
 }
 
 

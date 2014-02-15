@@ -4,6 +4,7 @@ import java.util.List;
 
 
 
+
 import org.springframework.samples.mvc.basic.dao.SampleDao;
 import org.springframework.samples.mvc.basic.model.Sample;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,18 @@ public class SampleServiceImpl implements SampleService {
         public List<Sample> listSample() {
                 return sampleDao.listSample();
         }
+
+		@Override
+		public void deleteSample(Long id) {
+			sampleDao.deleteSample(id);
+			
+		}
+
+		@Override
+		public void deleteSample2(Sample sample) {
+			sampleDao.deleteSample2(sample);
+			
+		}
 
 }
 

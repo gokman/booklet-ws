@@ -22,7 +22,18 @@ public class Sample  {
 	}
 
 private Long sampleId;
+
+@Column(name = "sample_surname")
+public String getSampleSurname() {
+	return sampleSurname;
+}
+
+public void setSampleSurname(String sampleSurname) {
+	this.sampleSurname = sampleSurname;
+}
+
 private String sampleName;
+private String sampleSurname;
 
 @NotNull
 @Column(name = "sample_id")
