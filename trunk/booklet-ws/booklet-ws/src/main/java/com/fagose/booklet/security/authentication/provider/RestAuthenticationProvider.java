@@ -31,19 +31,13 @@ public class RestAuthenticationProvider implements AuthenticationProvider {
 
         User user= userService.getUserRole(restToken.getKey(), restToken.getCredentials());
         
-        //String key = restToken.getKey();
-        //String credentials = restToken.getCredentials();
-
-        //if (!key.equals("gokhankcmn@gmail.com") || !credentials.equals("kocaman")) {
-        //    throw new BadCredentialsException("Enter a username and password");
-        //}
         
         if (user==null) {
-            throw new BadCredentialsException("Enter a username and password");
+            throw new BadCredentialsException("Enter an email and password");
         }
 
         //return getAuthenticatedUser(key, credentials);
-        return getAuthenticatedUser(user.getUserName(), user.getPassword());
+        return getAuthenticatedUser(user.getUserEmail(), user.getPassword());
     }
 
     private Authentication getAuthenticatedUser(String key, String credentials) {
