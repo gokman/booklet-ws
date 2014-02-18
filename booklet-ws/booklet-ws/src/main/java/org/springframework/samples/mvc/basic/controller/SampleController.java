@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.samples.mvc.basic.model.Sample;
 import org.springframework.samples.mvc.basic.service.SampleService;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
 @RequestMapping("/sample")
@@ -34,7 +35,6 @@ public class SampleController{
 	@RequestMapping(value="/listJson", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Sample> listSampleJson(ModelMap model) {
-		
 		return sampleService.listSample();
 	}
 	
@@ -69,11 +69,12 @@ public class SampleController{
 	    return "dene";
 	}
 	
-	@RequestMapping(value="/j_spring_security_check", method = RequestMethod.GET)
+	@RequestMapping(value="/login", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Sample> login(ModelMap model) {
-		
-		return sampleService.listSample();
+	public String login(ModelMap model) {
+		String userName=SecurityContextHolder.getContext().getAuthentication().getName();
+
+		return userName;
 	}
 	
 }
