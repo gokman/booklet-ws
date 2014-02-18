@@ -25,9 +25,9 @@ public class UserServiceImpl implements UserService {
         }
 
 		@Override
-		public User getUserRole(String username, String password) {
+		public User getUserRole(String email, String password) {
 			// TODO Auto-generated method stub
-			User user=userDao.getUserbyUsernamePassword(username, password);
+			User user=userDao.getUserbyUsernamePassword(email, password);
 			if(user==null){
 				//throw new BadCredentialsException("username and password is required");
 				return null;
@@ -46,6 +46,29 @@ public class UserServiceImpl implements UserService {
 				}
 			}
 			
+		}
+
+		@Override
+		public User getUserbyEmail(String email) {
+			// TODO Auto-generated method stub
+			User user=userDao.getUserbyEmail(email);
+			if(user==null){
+				//throw new BadCredentialsException("username and password is required");
+				return null;
+			}
+			else{
+			    Userroles userRole=userRoleDao.getUserRolebyUserId(user.getUserId());
+				if(userRole==null){
+					return null;
+				}
+				else{
+					if(userRole.getRoleName().equals("ROLE_ADMIN")){
+						return user;
+					}else{
+						return null;
+					}
+				}
+			}
 		}
 
 }
