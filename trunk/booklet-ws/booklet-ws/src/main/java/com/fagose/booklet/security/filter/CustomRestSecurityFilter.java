@@ -34,7 +34,7 @@ public class CustomRestSecurityFilter extends GenericFilterBean {
 
     public CustomRestSecurityFilter(AuthenticationManager authenticationManager) {
         this(authenticationManager, new BasicAuthenticationEntryPoint());
-        ((BasicAuthenticationEntryPoint)authenticationEntryPoint).setRealmName("Username: gokhankcmn@gmail.com Password: kocaman");
+        ((BasicAuthenticationEntryPoint)authenticationEntryPoint).setRealmName("Username: xxx@xxx.com Password: xxx");
     }
 
     public CustomRestSecurityFilter(AuthenticationManager authenticationManager, AuthenticationEntryPoint authenticationEntryPoint) {
