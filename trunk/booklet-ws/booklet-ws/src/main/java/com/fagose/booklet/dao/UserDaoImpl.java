@@ -2,7 +2,10 @@ package com.fagose.booklet.dao;
 
 import java.util.List;
 
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,32 +21,67 @@ public class UserDaoImpl implements UserDao {
 	 
 	@Override
 	public User getUserbyUsernamePassword(final String email,final String password) {
-		List<User> list = (List<User>) sessionFactory.getCurrentSession().createSQLQuery(
+		
+		final Session session=sessionFactory.openSession();
+		final Transaction transaction=session.beginTransaction();
+		
+		User user=null;
+		
+		try{
+		
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(
 				"SELECT * FROM User WHERE UserEmail=:email AND Password=:password").
-				addEntity(User.class).
-				setParameter("email", email).
-				setParameter("password", password).
-				list();
-		if(list.size()>0){
-			return list.get(0);
+				addEntity(User.class);
+		user=(User)query.setParameter("email", email).
+				         setParameter("password", password).
+				         uniqueResult();
+		}catch(Exception e){
+			transaction.rollback();
 		}
-		return null;
+		session.close();
+		
+		return user;
 	}
 
 
 	@Override
-	public User getUserbyEmail(String email) {
-		List<User> list= (List<User>) sessionFactory.getCurrentSession().createSQLQuery(
+	public User getUserbyEmail(final String email) {
+		
+		final Session session=sessionFactory.openSession();
+		final Transaction transaction=session.beginTransaction();
+		
+		User user=null;
+		
+		try{
+		SQLQuery query=sessionFactory.getCurrentSession().createSQLQuery(
 				"SELECT * FROM User WHERE UserEmail=:email").
-				addEntity(User.class).
-				setParameter("email", email).
-				list();
-		if(list.size()>0){
-			return list.get(0);
+				addEntity(User.class);
+		
+		user=(User)query.setParameter("email", email).uniqueResult();
+		}catch(Exception e){
+			transaction.rollback();
 		}
-		return null;
+		session.close();
+		return user;
+		
 	}
 
 
+	@Override
+	public void insertUser(final User user) {
+		
+		final Session session=sessionFactory.openSession();
+		final Transaction transaction=session.beginTransaction();
+		
+		try{
+			session.save(user);
+			transaction.commit();
+		}catch(Exception e){
+			transaction.rollback();
+		}
+		
+		session.close();
+		
+	}
 
 }

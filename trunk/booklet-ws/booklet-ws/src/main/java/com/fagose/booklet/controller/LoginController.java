@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fagose.booklet.model.User;
 import com.fagose.booklet.service.UserService;
 
 
@@ -24,6 +27,17 @@ public class LoginController{
 		String userEmail=SecurityContextHolder.getContext().getAuthentication().getName();
         String userName=userService.getUserbyEmail(userEmail).getUserName();
 		return userEmail+":"+userName;
+	}
+	
+	@RequestMapping(value="/register", method = RequestMethod.POST)
+	@ResponseBody
+	public String register(@RequestBody User user) {
+		try{
+		userService.insertUser(user);
+		}catch(Exception e){
+			return e.toString();
+		}
+		return "success";
 	}
 	
 }
