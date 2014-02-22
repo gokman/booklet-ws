@@ -6,5 +6,6 @@ public interface UserService {
 
         public User getUserRole(String username,String password);
         public User getUserbyEmail(String email);
+        public void insertUser(User user);
 }
 

@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 @Table(name = "User", catalog = "booklet")
 public class User{
 
-	private long userId;
+	private Long userId;
 	private String userEmail;
 	private String userName;
 	
@@ -32,11 +32,11 @@ public class User{
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "UserID", unique = true, nullable = false)
-	public long getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -57,12 +57,18 @@ public class User{
 
 	public User() {
 	}
+	
+	public User(String userName,String email,String password){
+		this.userName=userName;
+		this.userEmail=email;
+		this.password=password;
+	}
 
-	public User(long id) {
+	public User(Long id) {
 		this.userId = id;
 	}
 
-	public User(long id, String userName, String password, String about,
+	public User(Long id, String userName, String password, String about,
 			Date creationDate, Date lastUpdateDate,String userEmail) {
 		this.userId = id;
 		this.userEmail=userEmail;
