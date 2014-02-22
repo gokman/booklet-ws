@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -31,9 +32,9 @@ public class ActionDaoImpl implements ActionDao {
 		Criteria crit =sessionFactory.getCurrentSession().createCriteria(Action.class);
 		List<Action> resultList = null;
 		
-		if(sc.getUserId()!=null){
-			crit.add(Expression.eq("userId", sc.getUserId()));
-		}
+//		if(sc.getUserId()!=null){
+//			crit.add(Restrictions.eq("userId", sc.getUserId()));
+//		}
 		crit.setMaxResults(sc.getPageSize());
 		crit.setFirstResult(sc.getPageSize()*sc.getPageNumber());
 		if(sc.getOrderByCrit()!=null){

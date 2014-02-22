@@ -41,8 +41,6 @@ public class BookController{
 	@RequestMapping(value="/GET_BY_ID/{bookId}", method = RequestMethod.GET)
 	public @ResponseBody Book getBookById(@PathVariable Long bookId) throws IOException {
  
-		SearchCriteria searchCriteria= new SearchCriteria();
-		searchCriteria.setBookId(bookId);
 		Book book= bookService.getBookById(bookId);
 		return book;
  

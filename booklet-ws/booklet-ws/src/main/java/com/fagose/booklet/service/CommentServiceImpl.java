@@ -34,5 +34,8 @@ public class CommentServiceImpl implements CommentService {
 	public void deleteComment(Comment comment) {
 		commentDao.deleteComment(comment);
 	}
-
+	public Comment getByCommentId(Long commentId){
+		Comment comment = commentDao.getByCommentId(commentId);
+		return comment;
+	}
 }
