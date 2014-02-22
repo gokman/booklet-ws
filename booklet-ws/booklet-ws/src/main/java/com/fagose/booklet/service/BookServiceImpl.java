@@ -36,10 +36,14 @@ public class BookServiceImpl implements BookService {
         
         public List<BookLike> listBookLike(SearchCriteria searchCriteria) {
             return bookDao.listBookLike(searchCriteria);
-    }
+        }
 		@Override
 		public void deleteBook(Book book) {
 				bookDao.deleteBook(book);
+		}
+		public long countBookByUserId(Long bookId){
+			return bookDao.countBookByUserId(bookId);
+			 			
 		}
 
 }

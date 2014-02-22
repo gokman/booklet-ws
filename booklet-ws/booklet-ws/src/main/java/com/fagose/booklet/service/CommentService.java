@@ -13,5 +13,7 @@ public interface CommentService {
         public void deleteComment(Comment comment);
         public Comment getByCommentId(Long commentId);
         public List<Comment> listComments(SearchCriteria searchCriteria);
+        public List<Comment> listUserComments(SearchCriteria searchCriteria);
+        
 }
 

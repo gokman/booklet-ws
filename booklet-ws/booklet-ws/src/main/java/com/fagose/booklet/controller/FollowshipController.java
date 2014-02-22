@@ -1,5 +1,6 @@
 package com.fagose.booklet.controller;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fagose.booklet.model.Followship;
+import com.fagose.booklet.model.User;
 import com.fagose.booklet.service.FollowshipService;
 
 
@@ -41,5 +43,21 @@ public class FollowshipController{
 	public void delete(HttpServletRequest req,@ModelAttribute("followship")Followship followship ,BindingResult result) {
 		followshipService.deleteFollowship(followship);
 	}	
+	
+	@RequestMapping(value="/GET_FOLLOWER_LIST/{userId}", method = RequestMethod.GET)
+	public @ResponseBody List <User> getFollowerList(@PathVariable Long userId) throws IOException {
+		List <User> followerUserList= followshipService.getFollowerList(userId);
+		return followerUserList;
+	}
+	
+	@RequestMapping(value="/GET_FOLLOWING_LIST/{userId}", method = RequestMethod.GET)
+	public @ResponseBody List <User> getFollowingList(@PathVariable Long userId) throws IOException {
+		List <User> followingUserList= followshipService.getFollowingList(userId);
+		return followingUserList;
+	}
+	@RequestMapping(value="/UNFOLLOW/{userId}/{followedId}", method = RequestMethod.DELETE)
+	public void getFollowingList(@PathVariable Long userId,@PathVariable Long followedId) throws IOException {
+		followshipService.unFollow(userId, followedId);
+	}
 	
 }

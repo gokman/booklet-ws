@@ -99,5 +99,12 @@ public class BookDaoImpl implements BookDao {
 	public void deleteBook(Book book) {
 		sessionFactory.getCurrentSession().delete(book);
 	}
+	public long countBookByUserId(long userId){
+		Criteria crit =sessionFactory.getCurrentSession().createCriteria(Book.class);
+		crit.add(Expression.eq("adderId", userId));
+		
+		return (long)crit.list().size();
+				
+	}
 
 }

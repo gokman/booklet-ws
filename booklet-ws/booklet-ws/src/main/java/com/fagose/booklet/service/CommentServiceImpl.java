@@ -38,4 +38,10 @@ public class CommentServiceImpl implements CommentService {
 		Comment comment = commentDao.getByCommentId(commentId);
 		return comment;
 	}
+
+	@Override
+	public List<Comment> listUserComments(SearchCriteria searchCriteria) {
+		
+		return commentDao.listUserComments(searchCriteria);
+	}
 }
