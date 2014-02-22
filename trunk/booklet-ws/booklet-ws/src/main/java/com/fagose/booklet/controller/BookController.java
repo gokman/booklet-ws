@@ -79,4 +79,9 @@ public class BookController{
 		bookService.deleteBook(book);
 	}	
 	
+	@RequestMapping(value = "/COUNT/{userId}")
+	public long countBookByUserId(@PathVariable Long userId) {
+		return bookService.countBookByUserId(userId);
+	}
+	
 }
