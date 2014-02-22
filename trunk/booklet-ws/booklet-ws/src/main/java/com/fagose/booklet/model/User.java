@@ -27,6 +27,7 @@ public class User{
 	private Long userId;
 	private String userEmail;
 	private String userName;
+	private String activationToken;
 	
 	
 	@Id
@@ -47,6 +48,15 @@ public class User{
 
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
+	}
+	
+	@Column(name = "ActivationToken", length = 50)
+	public String getactivationToken() {
+		return activationToken;
+	}
+
+	public void setactivationToken(String activationToken) {
+		this.activationToken = activationToken;
 	}
 
 	private String password;
