@@ -59,4 +59,14 @@ public class CommentController{
 		commentService.deleteComment(comment);
 	}	
 	
+	@RequestMapping(value="/LIST_USER_COMMENTS/{adderId}", method = RequestMethod.GET)
+	public @ResponseBody List<Comment> getUserComments(@PathVariable Long adderId) throws IOException {
+ 
+		SearchCriteria searchCriteria= new SearchCriteria();
+		searchCriteria.setAdderId(adderId);
+		List<Comment> commentList = commentService.listUserComments(searchCriteria);
+		return commentList;
+ 
+	}
+	
 }
