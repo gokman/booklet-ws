@@ -24,25 +24,11 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	<!-- Enables Spring Security -->
-	<filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>
-            org.springframework.web.filter.DelegatingFilterProxy
-        </filter-class>
-    </filter>
-    
-	<filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
 	<!-- Handles all requests into the application -->
 		<context-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 		/WEB-INF/booklet-ws-servlet.xml
-	    /WEB-INF/security-context.xml
 		</param-value>
 		</context-param>		
 	<servlet>

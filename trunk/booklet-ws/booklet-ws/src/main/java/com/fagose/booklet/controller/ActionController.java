@@ -1,4 +1,5 @@
 package com.fagose.booklet.controller;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fagose.booklet.model.Action;
-import com.fagose.booklet.model.Book;
 import com.fagose.booklet.service.ActionService;
 import com.fagose.booklet.to.SearchCriteria;
 
@@ -24,7 +24,7 @@ public class ActionController{
 	@RequestMapping(value = "/ADD", method = RequestMethod.POST)
 	@ResponseBody
 	public Action addAction(@RequestBody Action action) {
-
+		action.setActionDate(new Date());
 		actionService.addAction(action);
 		
 		return action;

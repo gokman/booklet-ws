@@ -1,4 +1,3 @@
-
 package com.fagose.booklet.model;
 // default package
 // Generated Jan 13, 2014 10:33:06 PM by Hibernate Tools 3.4.0.CR1
@@ -26,7 +25,6 @@ public class Book{
 	private Long adderId;
 	private String writer;
 	private String coverPhoto;
-	private Date creationDate;
 	public Book() {
 	}
 
@@ -86,14 +84,4 @@ public class Book{
 		this.coverPhoto = coverPhoto;
 	}
 	
-	@Column(name = "CreationDate")
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
-
 }

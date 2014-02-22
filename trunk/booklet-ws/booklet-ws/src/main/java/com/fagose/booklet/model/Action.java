@@ -25,12 +25,15 @@ public class Action implements java.io.Serializable {
 	private Long userId;
 	private Long actionId;
 	private Date actionDate;
+	private Long actionDetailId;
 	
 	public Action() {
 	}
 
 
-	public Action(ActionType actionType, Long userId, Long actionId) {
+	public Action(
+			ActionType actionType,
+			Long userId, Long actionId) {
 		this.actionType = actionType;
 		this.userId = userId;
 		this.actionId = actionId;
@@ -75,6 +78,16 @@ public class Action implements java.io.Serializable {
 
 	public void setActionDate(Date actionDate) {
 		this.actionDate = actionDate;
+	}
+
+	@Column(name="ActionDetailID")
+	public Long getActionDetailId() {
+		return actionDetailId;
+	}
+
+
+	public void setActionDetailId(Long actionDetailId) {
+		this.actionDetailId = actionDetailId;
 	}
 
 }

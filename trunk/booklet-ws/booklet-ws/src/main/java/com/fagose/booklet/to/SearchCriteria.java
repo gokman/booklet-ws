@@ -14,7 +14,7 @@ public class SearchCriteria {
 	private int pageNumber;
 	private String orderByCrit;
 	private String orderByDrc;
-	private String userId;
+	private Long userId;
 	public String getTag() {
 		return tag;
 	}
@@ -75,10 +75,10 @@ public class SearchCriteria {
 	public void setOrderByDrc(String orderByDrc) {
 		this.orderByDrc = orderByDrc;
 	}
-	public String getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 	

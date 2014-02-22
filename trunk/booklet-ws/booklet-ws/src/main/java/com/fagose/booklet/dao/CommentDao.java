@@ -10,6 +10,7 @@ import com.fagose.booklet.to.SearchCriteria;
 public interface CommentDao {
 		public void saveComment( Comment comment);
 		public void deleteComment( Comment comment);
+		public Comment getByCommentId(Long commentId);
         public List<Comment> listComments(SearchCriteria searchCriteria);
 }
 

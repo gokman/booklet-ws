@@ -46,7 +46,14 @@ public class CommentController{
 		
 		return comment;
 	}	  
-	  
+
+	@RequestMapping(value="/GET_BY_ID/{commentId}", method = RequestMethod.GET)
+	public @ResponseBody Comment getCommentById(@PathVariable Long commentId) throws IOException {
+ 
+		Comment comment= commentService.getByCommentId(commentId);
+		return comment;
+ 
+	}
 	@RequestMapping(value = "/delete")
 	public void delete(HttpServletRequest req,@ModelAttribute("comment")Comment comment,BindingResult result) {
 		commentService.deleteComment(comment);

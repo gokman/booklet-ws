@@ -37,7 +37,20 @@ public class CommentDaoImpl implements CommentDao {
 		resultList = crit.list();
 		
 		return resultList; 
+	}
+	public Comment getByCommentId(Long commentId){
+		Criteria crit =sessionFactory.getCurrentSession().createCriteria(Comment.class);
+		List<Comment> resultList = null;
+		Comment result =null;
+		crit.add(Expression.eq("commentId", commentId));
 
+		resultList = crit.list();
+		
+		if(resultList !=null && resultList.size()>0){
+			result = resultList.get(0);
+		}
+		return result;
+		
 	}
 	@Override
 	public void deleteComment(Comment comment) {
