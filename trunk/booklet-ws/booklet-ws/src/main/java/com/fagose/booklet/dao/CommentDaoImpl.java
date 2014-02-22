@@ -56,5 +56,17 @@ public class CommentDaoImpl implements CommentDao {
 	public void deleteComment(Comment comment) {
 		sessionFactory.getCurrentSession().delete(comment);
 	}
+	@SuppressWarnings("unchecked")
+	public List<Comment> listUserComments(SearchCriteria searchriteria) {
+		Criteria crit =sessionFactory.getCurrentSession().createCriteria(Comment.class);
+		List<Comment> resultList = null;
+		
+		if(searchriteria.getAdderId()!=null){
+			crit.add(Expression.eq("commenterId", searchriteria.getAdderId()));
+		}
+		resultList = crit.list();
+		
+		return resultList; 
+	}
 
 }

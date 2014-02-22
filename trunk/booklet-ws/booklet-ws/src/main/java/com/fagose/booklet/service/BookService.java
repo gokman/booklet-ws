@@ -13,5 +13,6 @@ public interface BookService {
         public List<Book> listBook(SearchCriteria bookSearchCriteria);
         public Book getBookById(Long bookId);
         public List<BookLike> listBookLike(SearchCriteria searchCriteria);
+        public long countBookByUserId(Long bookId);
 }
 
