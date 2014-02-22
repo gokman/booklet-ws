@@ -1,3 +1,4 @@
+
 package com.fagose.booklet.model;
 // default package
 // Generated Jan 13, 2014 10:33:06 PM by Hibernate Tools 3.4.0.CR1
