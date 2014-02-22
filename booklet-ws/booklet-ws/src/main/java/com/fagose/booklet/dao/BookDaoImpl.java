@@ -47,8 +47,10 @@ public class BookDaoImpl implements BookDao {
 		if(sc.getWriter()!=null){
 			crit.add(Expression.eq("writer", sc.getWriter()));
 		}
-		crit.setMaxResults(sc.getPageSize());
-		crit.setFirstResult(sc.getPageSize()*sc.getPageNumber());
+		if(sc.getPageSize()!= 0){
+			crit.setMaxResults(sc.getPageSize());
+			crit.setFirstResult(sc.getPageSize()*sc.getPageNumber());
+		}
 		if(sc.getOrderByCrit()!=null){
 			if(sc.getOrderByDrc()!=null && sc.getOrderByDrc().equals(ApplicationUtils.ORDER_BY_DIRECTION_DESCENDING)){
 				crit.addOrder(Order.desc(sc.getOrderByCrit()));	
