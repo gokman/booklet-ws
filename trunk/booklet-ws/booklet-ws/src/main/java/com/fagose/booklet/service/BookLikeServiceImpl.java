@@ -11,7 +11,7 @@ import com.fagose.booklet.dao.BookLikeDao;
 import com.fagose.booklet.model.BookLike;
 import com.fagose.booklet.to.SearchCriteria;
 
-@Service("commentService")
+@Service("bookLikeService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class BookLikeServiceImpl implements BookLikeService {
 
