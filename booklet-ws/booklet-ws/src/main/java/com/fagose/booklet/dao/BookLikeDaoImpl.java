@@ -12,7 +12,7 @@ import com.fagose.booklet.model.BookLike;
 import com.fagose.booklet.model.Comment;
 import com.fagose.booklet.to.SearchCriteria;
 
-@Repository("commentDao")
+@Repository("bookLikeDao")
 public class BookLikeDaoImpl implements BookLikeDao {
 
 
