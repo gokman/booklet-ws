@@ -1,6 +1,8 @@
 package com.fagose.booklet.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -10,18 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fagose.booklet.model.Book;
 import com.fagose.booklet.model.User;
 import com.fagose.booklet.service.UserService;
+import com.fagose.booklet.to.SearchCriteria;
 
 
 @Controller
-@RequestMapping("/user")
-public class LoginController{
+@RequestMapping("/User")
+public class UserController{
 
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value="/login", method = RequestMethod.GET)
+	@RequestMapping(value="/LOGIN", method = RequestMethod.GET)
 	@ResponseBody
 	public String login(ModelMap model) {
 		String userEmail=SecurityContextHolder.getContext().getAuthentication().getName();
@@ -29,7 +33,7 @@ public class LoginController{
 		return userEmail+":"+userName;
 	}
 	
-	@RequestMapping(value="/register", method = RequestMethod.POST)
+	@RequestMapping(value="/REGISTER", method = RequestMethod.POST)
 	@ResponseBody
 	public String register(@RequestBody User user) {
 		try{
@@ -39,5 +43,11 @@ public class LoginController{
 		}
 		return "success";
 	}
-	
+	@RequestMapping(value = "/LIST",method = RequestMethod.POST)
+	@ResponseBody	
+	public List<User> listUsers(@RequestBody SearchCriteria searchCriteria) {
+		List <User> users = userService.listUsers(searchCriteria);
+		
+		return users;		
+	}	
 }
