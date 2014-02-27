@@ -41,7 +41,7 @@ public class MailSender {
              props.put("mail.smtp.auth", "true");
 
              final String username = "bilgi.app@gmail.com";
-             final String password = "bilgi";
+             final String password = "bilgiapp";
              
              //Kullanciyi gonderilecek aktivasyon linkinde kullanilacak random String
              SecureRandom random = new SecureRandom();
@@ -114,7 +114,7 @@ public class MailSender {
                      props.put("mail.smtp.auth", "true");
 
                      final String username = "bilgi.app@gmail.com";
-                     final String password = "bilgi";
+                     final String password = "bilgiapp";
                      
                      //Kullanciyi gonderilecek aktivasyon linkinde kullanilacak random String
                      SecureRandom random = new SecureRandom();
