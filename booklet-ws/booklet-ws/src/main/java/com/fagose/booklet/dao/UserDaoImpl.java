@@ -2,6 +2,8 @@ package com.fagose.booklet.dao;
 
 import static com.fagose.booklet.util.ApplicationConstants.EMPTY_STRING;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
