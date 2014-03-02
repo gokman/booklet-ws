@@ -11,5 +11,8 @@ public interface UserService {
         public User getUserbyEmail(String email);
         public void insertUser(User user);
         public List<User> listUsers(SearchCriteria sc);
+        public User getUserbyUserName(String userName);
+        public void saveUserRole(User user,String role);
+        public void activateUser(User user);
 }
 

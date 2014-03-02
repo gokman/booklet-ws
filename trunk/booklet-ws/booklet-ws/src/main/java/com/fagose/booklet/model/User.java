@@ -23,6 +23,11 @@ public class User{
 	private String userEmail;
 	private String userName;
 	private String activationToken;
+	private String password;
+	private String about;
+	private Date creationDate;
+	private Date lastUpdateDate;
+	private Integer enabled;
 	
 	
 	@Id
@@ -53,12 +58,6 @@ public class User{
 	public void setActivationToken(String activationToken) {
 		this.activationToken = activationToken;
 	}
-
-	private String password;
-	private String about;
-	private Date creationDate;
-	private Date lastUpdateDate;
-	private Integer enabled;
 
 	public User() {
 	}

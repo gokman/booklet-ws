@@ -14,6 +14,7 @@ import com.fagose.booklet.model.Book;
 import com.fagose.booklet.model.User;
 import com.fagose.booklet.model.Userroles;
 import com.fagose.booklet.to.SearchCriteria;
+import com.fagose.booklet.util.ApplicationConstants;
 
 @Service("userService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService {
 					return null;
 				}
 				else{
-					if(userRole.getRoleName().equals("ROLE_ADMIN")){
+					if(userRole.getRoleName().equals(ApplicationConstants.ROLE_USER)){
 						return user;
 					}else{
 						return null;
@@ -66,7 +67,7 @@ public class UserServiceImpl implements UserService {
 					return null;
 				}
 				else{
-					if(userRole.getRoleName().equals("ROLE_ADMIN")){
+					if(userRole.getRoleName().equals(ApplicationConstants.ROLE_USER)){
 						return user;
 					}else{
 						return null;
@@ -83,5 +84,21 @@ public class UserServiceImpl implements UserService {
             return userDao.listUsers(searchCriteria);
     }
 
-}
+		@Override
+		public User getUserbyUserName(String userName) {
+			// TODO Auto-generated method stub
+			return userDao.getUserbyUserName(userName);
+		}
 
+		@Override
+		public void saveUserRole(User user, String role) {
+			userRoleDao.saveUserRole(user, role);			
+		}
+
+		@Override
+		public void activateUser(User user) {
+			userDao.activateUser(user);
+			
+		}
+
+}

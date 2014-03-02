@@ -16,14 +16,14 @@ import javax.persistence.Table;
 @Table(name = "userroles", catalog = "booklet")
 public class Userroles{
 
-	private Integer roleId;
-	private Integer userId;
+	private Long roleId;
+	private Long userId;
 	private String roleName;
 
 	public Userroles() {
 	}
 
-	public Userroles(Integer userId, String roleName) {
+	public Userroles(Long userId, String roleName) {
 		this.userId = userId;
 		this.roleName = roleName;
 	}
@@ -31,20 +31,20 @@ public class Userroles{
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "RoleID", unique = true, nullable = false)
-	public Integer getRoleId() {
+	public Long getRoleId() {
 		return this.roleId;
 	}
 
-	public void setRoleId(Integer roleId) {
+	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
 
 	@Column(name = "UserID")
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
