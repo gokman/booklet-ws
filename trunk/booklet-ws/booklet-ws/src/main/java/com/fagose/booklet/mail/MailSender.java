@@ -73,9 +73,8 @@ public class MailSender {
 
              sb.append("<BODY>\n");
              sb.append("<H1>" + subject + "</H1>" + "\n");
-             sb.append("<a href=\""+activationURL+
-                         "/"+user.getUserName()+"/"+activationString+
-                         ".htm\">Aktivasyon Maili</a>");
+             sb.append("<a href=\""+activationURL+"/"+activationString+
+                         "\">Aktivasyon Maili</a>");
 
              sb.append("</BODY>\n");
              sb.append("</HTML>\n");
