@@ -5,6 +5,7 @@ import static com.fagose.booklet.util.ApplicationConstants.EMPTY_STRING;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -114,6 +115,31 @@ public class UserDaoImpl implements UserDao {
 		
 		return resultList; 
 
+	}
+
+
+	@Override
+	public User getUserbyUserName(String userName) {
+
+		User user=null;
+		
+		SQLQuery query=sessionFactory.getCurrentSession().createSQLQuery(
+				"SELECT * FROM User WHERE UserName=:userName").
+				addEntity(User.class);
+		
+		user=(User)query.setParameter("userName", userName).uniqueResult();
+		
+		return user;
+	}
+
+
+	@Override
+	public void activateUser(User user) {
+		Query query=sessionFactory.getCurrentSession().createQuery("update User set enabled = :enabled where userId= :userId");
+		query.setParameter("enabled", 1);
+		query.setParameter("userId", user.getUserId());
+		query.executeUpdate();
+		
 	}
 
 }
