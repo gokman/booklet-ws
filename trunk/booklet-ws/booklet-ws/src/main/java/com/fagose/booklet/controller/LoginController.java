@@ -71,7 +71,7 @@ public class LoginController {
 		// activate user
 		userService.activateUser(user);
 		
-		return "aaa";
+		return ApplicationConstants.activationSucces;
 	}
 
 }
