@@ -12,6 +12,6 @@ public interface BookLikeService {
         public void addBookLike(BookLike bookLike);
         public void deleteBookLike(BookLike bookLike);
         public List<BookLike> listBookLikes(SearchCriteria searchCriteria);
-        
+        public BookLike getBookLikeById(Long id);
 }
 
