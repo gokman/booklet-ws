@@ -42,7 +42,7 @@ public class RestAuthenticationProvider implements AuthenticationProvider {
 
     private Authentication getAuthenticatedUser(String key, String credentials) {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
         return new RestToken(key, credentials, authorities);
     }
