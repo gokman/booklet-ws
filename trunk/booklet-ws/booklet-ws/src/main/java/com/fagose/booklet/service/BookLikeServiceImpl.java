@@ -34,4 +34,10 @@ public class BookLikeServiceImpl implements BookLikeService {
 	public void deleteBookLike(BookLike bookLike) {
 		bookLikeDao.deleteBookLike(bookLike);
 	}
+
+	@Override
+	public BookLike getBookLikeById(Long id) {
+		// TODO Auto-generated method stub
+		return bookLikeDao.getBookLikeById(id);
+	}
 }

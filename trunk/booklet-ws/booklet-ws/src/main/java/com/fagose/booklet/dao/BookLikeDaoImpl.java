@@ -38,4 +38,13 @@ public class BookLikeDaoImpl implements BookLikeDao {
 	public void deleteBookLike(BookLike comment) {
 		sessionFactory.getCurrentSession().delete(comment);
 	}
+
+	@Override
+	public BookLike getBookLikeById(Long id) {
+		return (BookLike)sessionFactory.
+				          getCurrentSession().
+				          createQuery("from BookLike where bookLikeId="+id).
+				          uniqueResult();
+		
+	}
 }

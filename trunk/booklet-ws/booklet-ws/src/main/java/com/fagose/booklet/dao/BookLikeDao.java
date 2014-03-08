@@ -1,3 +1,4 @@
+
 package com.fagose.booklet.dao;
 
 import java.util.List;
@@ -9,6 +10,7 @@ public interface BookLikeDao {
 		public void saveBookLike( BookLike bookLike);
 		public void deleteBookLike( BookLike bookLike);
         public List<BookLike> listBookLikes(SearchCriteria searchCriteria);
+        public BookLike getBookLikeById(Long id);
 }
 
 
