@@ -17,22 +17,22 @@ import com.fagose.booklet.util.ApplicationConstants;
 import com.fagose.booklet.util.ApplicationUtils;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/User")
 public class LoginController {
 
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/LOGIN", method = RequestMethod.GET)
 	@ResponseBody
 	public String login(ModelMap model) {
 		String userEmail = SecurityContextHolder.getContext()
 				.getAuthentication().getName();
-		String userName = userService.getUserbyEmail(userEmail).getUserName();
-		return userEmail + ":" + userName;
+		User user = userService.getUserbyEmail(userEmail);
+		return userEmail + ":" + user.getUserName()+":"+user.getUserId();
 	}
 
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@RequestMapping(value = "/REGISTER", method = RequestMethod.POST)
 	@ResponseBody
 	public String register(@RequestBody User user) {
 		// kullanıcıya etkinleştirme maili gönderilecek ve enabled 0 atanacak
@@ -40,7 +40,7 @@ public class LoginController {
 		String activationToken = "";
 		try {
 			activationToken = MailSender.sendActivationEmail(user,
-					"http://localhost:8080/booklet-ws/services/user/activateUserAccount/"
+					"http://localhost:8080/booklet-ws/services/User/activateUserAccount/"
 							+ user.getUserName());
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block

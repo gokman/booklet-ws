@@ -25,24 +25,6 @@ public class UserController{
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value="/LOGIN", method = RequestMethod.GET)
-	@ResponseBody
-	public String login(ModelMap model) {
-		String userEmail=SecurityContextHolder.getContext().getAuthentication().getName();
-        String userName=userService.getUserbyEmail(userEmail).getUserName();
-		return userEmail+":"+userName;
-	}
-	
-	@RequestMapping(value="/REGISTER", method = RequestMethod.POST)
-	@ResponseBody
-	public String register(@RequestBody User user) {
-		try{
-		userService.insertUser(user);
-		}catch(Exception e){
-			return e.toString();
-		}
-		return "success";
-	}
 	@RequestMapping(value = "/LIST",method = RequestMethod.POST)
 	@ResponseBody	
 	public List<User> listUsers(@RequestBody SearchCriteria searchCriteria) {
