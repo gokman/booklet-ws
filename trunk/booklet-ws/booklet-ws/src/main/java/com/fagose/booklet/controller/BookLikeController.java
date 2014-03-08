@@ -38,10 +38,10 @@ public class BookLikeController{
 		return bookLikes;		
 	}
 	
-	@RequestMapping(value = "/DELETE", method = RequestMethod.POST)
+	@RequestMapping(value = "/DELETE", method = RequestMethod.DELETE)
 	@ResponseBody
-	public BookLike deleteBookLike(@RequestBody BookLike bookLike) {
+	public String deleteBookLike(@RequestBody BookLike bookLike) {
 		bookLikeService.deleteBookLike(bookLike);
-		return bookLike;
+		return "";
 	}
 }
