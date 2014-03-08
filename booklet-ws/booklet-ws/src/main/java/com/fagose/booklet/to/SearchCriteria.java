@@ -16,6 +16,8 @@ public class SearchCriteria {
 	private String orderByDrc;
 	private Long userId;
 	private String userName;
+	private Long followerId;
+	private Long followingId;
 	
 	public String getTag() {
 		return tag;
@@ -88,6 +90,18 @@ public class SearchCriteria {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public Long getFollowerId() {
+		return followerId;
+	}
+	public void setFollowerId(Long followerId) {
+		this.followerId = followerId;
+	}
+	public Long getFollowingId() {
+		return followingId;
+	}
+	public void setFollowingId(Long followingId) {
+		this.followingId = followingId;
 	}
 	
 }
