@@ -101,4 +101,10 @@ public class UserServiceImpl implements UserService {
 			
 		}
 
+		@Override
+		public String getUserPassword(String email) {
+			// TODO Auto-generated method stub
+			return userDao.getUserPassword(email);
+		}
+
 }
