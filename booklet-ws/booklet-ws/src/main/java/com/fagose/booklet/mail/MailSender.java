@@ -25,6 +25,7 @@ public class MailSender {
 	
         @Autowired
         private ApplicationContext context;
+        
         public static String sendActivationEmail (User user,String activationURL)throws Exception{
 
         try{    
@@ -97,40 +98,36 @@ public class MailSender {
                
         }
 
-        public static String sendForgottenPassword(User user)throws Exception{
+        public static String sendForgottenPassword(String email,BigInteger token)throws Exception{
 
                 try{    
-                        String title = "Booklet Uygulamasi Sifre Hatirlatma";
+                    String title = "Booklet Uygulamasi Aktivasyon Maili";
 
-                 //    Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-                     final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
-                     Properties props = System.getProperties();
-                     props.setProperty("mail.smtp.host", "smtp.gmail.com");
-                     props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
-                     props.setProperty("mail.smtp.socketFactory.fallback", "false");
-                     props.setProperty("mail.smtp.port", "465");
-                     props.setProperty("mail.smtp.socketFactory.port", "465");
-                     props.put("mail.smtp.auth", "true");
+                 // Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+                    final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+                    Properties props = System.getProperties();
+                    props.put("mail.smtp.host", "smtp.gmail.com");
+                    props.put("mail.smtp.socketFactory.class", SSL_FACTORY);
+                    props.put("mail.smtp.socketFactory.fallback", "false");
+                    props.put("mail.smtp.port", "465");
+                    props.put("mail.smtp.socketFactory.port", "465");
+                    props.put("mail.smtp.auth", "true");
 
-                     final String username = "bilgi.app@gmail.com";
-                     final String password = "bilgiapp";
-                     
-                     //Kullanciyi gonderilecek aktivasyon linkinde kullanilacak random String
-                     SecureRandom random = new SecureRandom();
-                     String activationString =new BigInteger(130, random).toString(20).substring(0,19);                
+                    final String username = "bilgi.app@gmail.com";
+                    final String password = "bilgiapp";
                          
                      Session session = Session.getDefaultInstance(props,new Authenticator() {
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                         return new PasswordAuthentication(username,
-                           password);
-                        }
-                       });  
+                         protected PasswordAuthentication getPasswordAuthentication() {
+                          return new PasswordAuthentication(username,
+                            password);
+                         }
+                        });   
                    
                      // -- Create a new message --
                      Message msg = new MimeMessage(session);  
                      msg.setFrom(new InternetAddress(username));
-                     msg.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getUserEmail()));
-                     msg.setSubject("Activation Email");
+                     msg.addRecipient(Message.RecipientType.TO, new InternetAddress("gokhankcmn@gmail.com"));
+                     msg.setSubject("Reset Token for Password Change");
                      //*************************************************************
 
                      String line;
@@ -145,16 +142,15 @@ public class MailSender {
 
                      sb.append("<BODY>\n");
                      sb.append("<H1>" + subject + "</H1>" + "\n");
-                     sb.append("<h3>Sifre : "+user.getPassword()+"</h3>");
+                     sb.append("<h3>Sifre : "+token+"</h3>");
                      sb.append("</BODY>\n");
                      sb.append("</HTML>\n");
-
-                     msg.setDataHandler(new DataHandler(new ByteArrayDataSource(sb.toString(), "text/html")));      
+                     
+                     msg.setDataHandler(new DataHandler(new ByteArrayDataSource(sb.toString(), "text/html")));  
                      
          //*************************************************************            
                      Transport.send(msg);
 
-                     return activationString;
             }
 
             catch (Exception ex) {
@@ -162,9 +158,9 @@ public class MailSender {
               ex.printStackTrace( );
 
             }
-                return null;
-                       
-                       
-                }
+                
+                return "gonderildi";
+                                             
+           }
        
 }
