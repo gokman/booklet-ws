@@ -13,6 +13,7 @@ public interface UserDao {
 		public List<User> listUsers(SearchCriteria sc);
 		public User getUserbyUserName(String userName);
 		public void activateUser(User user);
+		public String getUserPassword(String email);
 }
 
 
