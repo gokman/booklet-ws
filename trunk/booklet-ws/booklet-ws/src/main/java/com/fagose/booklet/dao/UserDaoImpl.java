@@ -142,4 +142,16 @@ public class UserDaoImpl implements UserDao {
 		
 	}
 
+
+	@Override
+	public String getUserPassword(String email) {
+		
+		Query query=sessionFactory.getCurrentSession().createQuery("select password from User where email=:email");
+		query.setParameter("email", email);
+		String password=query.uniqueResult().toString();
+		
+		
+		return password;
+	}
+
 }
