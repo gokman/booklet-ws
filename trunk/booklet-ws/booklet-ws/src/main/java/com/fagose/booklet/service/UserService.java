@@ -15,5 +15,6 @@ public interface UserService {
         public void saveUserRole(User user,String role);
         public void activateUser(User user);
         public String getUserPassword(String email);
+        public void updatePassword(long userId,String password);
 }
 

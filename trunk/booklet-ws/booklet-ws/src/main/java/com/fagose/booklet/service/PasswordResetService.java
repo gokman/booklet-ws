@@ -6,5 +6,6 @@ public interface PasswordResetService {
 
         public void addPasswordReset(PasswordReset passwordReset);
         public void deletePasswordReset(PasswordReset passwordReset);
+        public PasswordReset isPasswordResetExist(long userId,long token);
 }
 

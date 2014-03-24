@@ -57,7 +57,8 @@ public class UserServiceImpl implements UserService {
 		public User getUserbyEmail(String email) {
 			// TODO Auto-generated method stub
 			User user=userDao.getUserbyEmail(email);
-			if(user==null){
+			return user;
+			/*if(user==null){
 				//throw new BadCredentialsException("username and password is required");
 				return null;
 			}
@@ -73,7 +74,7 @@ public class UserServiceImpl implements UserService {
 						return null;
 					}
 				}
-			}
+			}*/
 		}
 
 		@Override
@@ -105,6 +106,12 @@ public class UserServiceImpl implements UserService {
 		public String getUserPassword(String email) {
 			// TODO Auto-generated method stub
 			return userDao.getUserPassword(email);
+		}
+
+		@Override
+		public void updatePassword(long userId, String password) {
+			userDao.updatePassword(userId, password);
+			
 		}
 
 }
