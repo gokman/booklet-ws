@@ -29,11 +29,12 @@
     <http create-session="stateless" entry-point-ref="authenticationEntryPoint" 
           authentication-manager-ref="authenticationManager">
         <custom-filter ref="customRestFilter" position="BASIC_AUTH_FILTER" />
-        <intercept-url pattern="/services/user/register" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <intercept-url pattern="/services/user/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <intercept-url pattern="/services/user/activateUserAccount/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/services/User/REGISTER" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/services/User/LOGIN" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/services/User/activateUserAccount/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/services/User/SEND_RESET_TOKEN" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/services/sample/listJson" access="IS_AUTHENTICATED_ANONYMOUSLY"/> 
-        <intercept-url pattern="/**" access="ROLE_USER" />
+        <intercept-url pattern="/services/**" access="ROLE_USER" />
     </http>
     
     <!-- The authenticationEntryPoint allows us to customise to start the authentication process 
