@@ -53,23 +53,41 @@ public class UserController{
 		
 		BigInteger token=new BigInteger(25, new SecureRandom());
 		
-		try {
+		User user=userService.getUserbyEmail(email);
+		
+		/*try {
 			MailSender.sendForgottenPassword(email, token);
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "error";
-		}
+		}*/
 		PasswordReset passReset=new PasswordReset();
 		passReset.setresetToken(token.longValue());
-		passReset.setUserId(1L);
+		passReset.setUserId(user.getUserId());
 		passReset.setValidationDate(new java.sql.Date(ApplicationUtils.dateFormat
 				.getCalendar().getTime().getTime()));
 		
 		passwordResetService.addPasswordReset(passReset);
 		
+		return "success";		
+	}
+	
+	@RequestMapping(value = "/RESET_PASSWORD",method = RequestMethod.POST)
+	@ResponseBody	
+	public String resetPassword(@RequestBody String email,@RequestBody String password,@RequestBody long token) {
+		//get user by email
+		User user=userService.getUserbyEmail(email);
+		//control password reset table with user id
+		PasswordReset passReset=passwordResetService.isPasswordResetExist(user.getUserId(),token);
 		
+		if(passReset==null){
+			return "not_found";
+		}else {
+			//update password from user table	
+			userService.updatePassword(user.getUserId(),password);
+		}
 		return "success";		
 	}
 	

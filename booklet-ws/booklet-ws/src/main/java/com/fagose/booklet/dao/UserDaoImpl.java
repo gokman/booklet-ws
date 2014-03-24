@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao {
 		try{
 		
 		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(
-				"SELECT * FROM User WHERE UserEmail=:email AND Password=:password").
+				"SELECT * FROM User WHERE UserEmail="+"'"+":email"+"'"+" AND Password="+"'"+":password"+"'").
 				addEntity(User.class);
 		user=(User)query.setParameter("email", email).
 				         setParameter("password", password).
@@ -55,25 +55,20 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User getUserbyEmail(final String email) {
 		
-		final Session session=sessionFactory.openSession();
-		final Transaction transaction=session.beginTransaction();
-		
-		User user=null;
+		User user=new User();
 		
 		try{
 		SQLQuery query=sessionFactory.getCurrentSession().createSQLQuery(
-				"SELECT * FROM User WHERE UserEmail=:email").
+				"SELECT * FROM User WHERE UserEmail='"+email+"'").
 				addEntity(User.class);
 		
-		user=(User)query.setParameter("email", email).uniqueResult();
+		//user=(User)query.setParameter("email", email).uniqueResult();
+		user=(User)query.uniqueResult();
 		}catch(Exception e){
-			transaction.rollback();
+			return null;
 		}
-		session.close();
-		return user;
-		
+		return user;	
 	}
-
 
 	@Override
 	public void insertUser(final User user) {
@@ -152,6 +147,17 @@ public class UserDaoImpl implements UserDao {
 		
 		
 		return password;
+	}
+
+
+	@Override
+	public void updatePassword(long userId, String password) {
+		Query query=sessionFactory.getCurrentSession().createQuery("update User set password = :password where userId= :userId");
+		query.setParameter("password", password);
+		query.setParameter("userId", userId);
+		query.executeUpdate();
+		
+		
 	}
 
 }

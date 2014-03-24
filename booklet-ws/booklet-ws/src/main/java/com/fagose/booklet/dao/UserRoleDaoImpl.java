@@ -1,21 +1,16 @@
 package com.fagose.booklet.dao;
 
-import java.util.List;
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.fagose.booklet.model.User;
 import com.fagose.booklet.model.Userroles;
 
 @Repository("userRoleDao")
 public class UserRoleDaoImpl implements UserRoleDao {
 
-
     @Autowired
     private SessionFactory sessionFactory;
-
 	
 	@Override
 	public Userroles getUserRolebyUserId(long userId) {
@@ -26,7 +21,6 @@ public class UserRoleDaoImpl implements UserRoleDao {
 	
 	}
 
-
 	@Override
 	public void saveUserRole(User user, String role) {
 		Userroles userRole=new Userroles();
@@ -35,7 +29,5 @@ public class UserRoleDaoImpl implements UserRoleDao {
 		sessionFactory.getCurrentSession().save(userRole);
 		
 	}
-
-
 
 }
