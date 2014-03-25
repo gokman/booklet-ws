@@ -33,6 +33,7 @@
         <intercept-url pattern="/services/User/LOGIN" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/services/User/activateUserAccount/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/services/User/SEND_RESET_TOKEN" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/services/User/RESET_PASSWORD" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/services/sample/listJson" access="IS_AUTHENTICATED_ANONYMOUSLY"/> 
         <intercept-url pattern="/services/**" access="ROLE_USER" />
     </http>
