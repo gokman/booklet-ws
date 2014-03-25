@@ -57,8 +57,8 @@ public class UserServiceImpl implements UserService {
 		public User getUserbyEmail(String email) {
 			// TODO Auto-generated method stub
 			User user=userDao.getUserbyEmail(email);
-			return user;
-			/*if(user==null){
+			
+			if(user==null){
 				//throw new BadCredentialsException("username and password is required");
 				return null;
 			}
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
 						return null;
 					}
 				}
-			}*/
+			}
 		}
 
 		@Override
