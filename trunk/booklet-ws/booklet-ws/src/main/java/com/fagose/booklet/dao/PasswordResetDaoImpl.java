@@ -31,7 +31,7 @@ public class PasswordResetDaoImpl implements PasswordResetDao {
 	public PasswordReset isPasswordResetService(long userId,long resetToken) {
 		PasswordReset passReset=new PasswordReset();
 		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(
-				"SELECT * FROM PasswordReset WHERE userId=:userId AND resetToken=:resetToken").
+				"SELECT * FROM PasswordReset WHERE UserID=:userId AND ResetToken=:resetToken").
 				addEntity(PasswordReset.class);
 		passReset=(PasswordReset)query.setParameter("userId", userId).
 				         setParameter("resetToken", resetToken).

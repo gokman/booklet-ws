@@ -15,10 +15,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fagose.booklet.mail.MailSender;
 import com.fagose.booklet.model.PasswordReset;
 import com.fagose.booklet.model.User;
+import com.fagose.booklet.object.CustomResetPassword;
 import com.fagose.booklet.service.PasswordResetService;
 import com.fagose.booklet.service.UserService;
 import com.fagose.booklet.to.SearchCriteria;
 import com.fagose.booklet.util.ApplicationUtils;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 
 @Controller
@@ -53,16 +58,16 @@ public class UserController{
 		
 		BigInteger token=new BigInteger(25, new SecureRandom());
 		
-		User user=userService.getUserbyEmail(email);
+		User user=userService.getUserbyEmail(ApplicationUtils.getJsonValue(email, "email"));
 		
-		/*try {
+		try {
 			MailSender.sendForgottenPassword(email, token);
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "error";
-		}*/
+		}
 		PasswordReset passReset=new PasswordReset();
 		passReset.setresetToken(token.longValue());
 		passReset.setUserId(user.getUserId());
@@ -76,17 +81,18 @@ public class UserController{
 	
 	@RequestMapping(value = "/RESET_PASSWORD",method = RequestMethod.POST)
 	@ResponseBody	
-	public String resetPassword(@RequestBody String email,@RequestBody String password,@RequestBody long token) {
+	public String resetPassword(@RequestBody CustomResetPassword object) {
 		//get user by email
-		User user=userService.getUserbyEmail(email);
+		User user=userService.getUserbyEmail("'"+object.getEmail()+"'");
 		//control password reset table with user id
-		PasswordReset passReset=passwordResetService.isPasswordResetExist(user.getUserId(),token);
+		PasswordReset passReset=passwordResetService.isPasswordResetExist(user.getUserId(),
+				object.getToken());
 		
 		if(passReset==null){
 			return "not_found";
 		}else {
 			//update password from user table	
-			userService.updatePassword(user.getUserId(),password);
+			userService.updatePassword(user.getUserId(),object.getPassword());
 		}
 		return "success";		
 	}
