@@ -23,15 +23,21 @@ public class PasswordResetServiceImpl implements PasswordResetService {
                 passwordResetDao.savePasswordReset(passwordReset);
         }
        
-		@Override
+		@Transactional
 		public void deletePasswordReset(PasswordReset passwordReset) {
 				passwordResetDao.deletePasswordReset(passwordReset);
 		}
 
 		@Override
-		public PasswordReset isPasswordResetExist(long userId,long token) {
+		public PasswordReset findRecordByUserId(long userId) {
 			// TODO Auto-generated method stub
-			return passwordResetDao.isPasswordResetService(userId,token);
+			return passwordResetDao.findRecordByUserId(userId);
+		}
+
+		@Override
+		public PasswordReset isPasswordResetExist(long userId, long token) {
+			// TODO Auto-generated method stub
+			return passwordResetDao.isPasswordResetExist(userId,token);
 		}
 		
 

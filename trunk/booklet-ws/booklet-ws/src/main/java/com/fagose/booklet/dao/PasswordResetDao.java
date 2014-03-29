@@ -6,7 +6,8 @@ public interface PasswordResetDao {
 	
 		public void savePasswordReset(PasswordReset passReset);
 		public void deletePasswordReset(PasswordReset passReset);
-		public PasswordReset isPasswordResetService(long userId,long token);
+		public PasswordReset findRecordByUserId(long userId);
+		public PasswordReset isPasswordResetExist(long userId,long token);
 }
 
 
