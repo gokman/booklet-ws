@@ -60,6 +60,12 @@ public class UserController{
 		
 		User user=userService.getUserbyEmail(ApplicationUtils.getJsonValue(email, "email"));
 		
+		//isleme baslamadan once passwordreset tablosunda kayit kaldi ise onu sil
+		PasswordReset passReset=passwordResetService.findRecordByUserId(user.getUserId());
+		if(passReset!=null){
+		    passwordResetService.deletePasswordReset(passReset);
+		}
+		
 		try {
 			MailSender.sendForgottenPassword(email, token);
 		} 
@@ -68,13 +74,13 @@ public class UserController{
 			e.printStackTrace();
 			return "error";
 		}
-		PasswordReset passReset=new PasswordReset();
-		passReset.setresetToken(token.longValue());
-		passReset.setUserId(user.getUserId());
-		passReset.setValidationDate(new java.sql.Date(ApplicationUtils.dateFormat
+		PasswordReset passReset2=new PasswordReset();
+		passReset2.setresetToken(token.longValue());
+		passReset2.setUserId(user.getUserId());
+		passReset2.setValidationDate(new java.sql.Date(ApplicationUtils.dateFormat
 				.getCalendar().getTime().getTime()));
 		
-		passwordResetService.addPasswordReset(passReset);
+		passwordResetService.addPasswordReset(passReset2);
 		
 		return "success";		
 	}
@@ -95,6 +101,19 @@ public class UserController{
 			userService.updatePassword(user.getUserId(),object.getPassword());
 		}
 		return "success";		
+	}
+	
+	@RequestMapping(value = "/IS_USER_EXIST",method = RequestMethod.POST)
+	@ResponseBody	
+	public boolean isUserExist(@RequestBody User user) {
+		//get user by email
+		User userLocal=userService.getUserbyEmail("'"+user.getUserEmail()+"'");
+		//control password reset table with user id
+		if(userLocal==null){
+			return false;
+		}else{
+			return true;
+		}
 	}
 	
 }

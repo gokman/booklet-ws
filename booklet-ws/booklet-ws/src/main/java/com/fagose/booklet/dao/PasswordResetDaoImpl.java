@@ -1,5 +1,8 @@
 package com.fagose.booklet.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +31,28 @@ public class PasswordResetDaoImpl implements PasswordResetDao {
 	}
 
 	@Override
-	public PasswordReset isPasswordResetService(long userId,long resetToken) {
+	public PasswordReset findRecordByUserId(long userId) {
+		List<PasswordReset> passReset=null;
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(
+				         "SELECT * FROM PasswordReset WHERE UserID=:userId").
+				         addEntity(PasswordReset.class);
+		passReset=(List<PasswordReset>)query.setParameter("userId", userId).list();
+		if(passReset.size()>0){
+			return  passReset.get(0);
+		}else{
+			return null;
+		}
+	}
+
+	@Override
+	public PasswordReset isPasswordResetExist(long userId, long token) {
 		PasswordReset passReset=new PasswordReset();
 		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(
-				"SELECT * FROM PasswordReset WHERE UserID=:userId AND ResetToken=:resetToken").
+				"SELECT * FROM PasswordReset WHERE UserID=:userId and ResetToken=:resetToken").
 				addEntity(PasswordReset.class);
 		passReset=(PasswordReset)query.setParameter("userId", userId).
-				         setParameter("resetToken", resetToken).
-				         uniqueResult();
+				                       setParameter("resetToken", token).
+				                       uniqueResult();
 		return passReset;
 	}
 	

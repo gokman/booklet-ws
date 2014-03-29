@@ -69,6 +69,7 @@ public class UserDaoImpl implements UserDao {
 		}
 		return user;	
 	}
+	
 
 	@Override
 	public void insertUser(final User user) {
