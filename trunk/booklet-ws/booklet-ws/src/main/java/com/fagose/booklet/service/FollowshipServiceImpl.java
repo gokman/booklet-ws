@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fagose.booklet.dao.FollowshipDao;
 import com.fagose.booklet.model.Followship;
 import com.fagose.booklet.model.User;
+import com.fagose.booklet.to.SearchCriteria;
 
 @Service("followshipService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -46,5 +47,10 @@ public class FollowshipServiceImpl implements FollowshipService {
 	}
 	public void unFollow(Long userId,Long followedId){
 		followshipDao.unFollow(userId, followedId);
+	}
+
+	@Override
+	public List<Followship> listFollowship(SearchCriteria searchCriteria) {
+		return followshipDao.listFollowship(searchCriteria);
 	}
 }

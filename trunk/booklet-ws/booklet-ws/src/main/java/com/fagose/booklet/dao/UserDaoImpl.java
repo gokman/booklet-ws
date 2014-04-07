@@ -59,14 +59,15 @@ public class UserDaoImpl implements UserDao {
 		
 		try{
 		SQLQuery query=sessionFactory.getCurrentSession().createSQLQuery(
-				"SELECT * FROM User WHERE UserEmail="+email).
+				"SELECT * FROM User WHERE UserEmail=:email").
 				addEntity(User.class);
 		
 		//user=(User)query.setParameter("email", email).uniqueResult();
-		user=(User)query.uniqueResult();
+		user=(User)query.setParameter("email",email).uniqueResult();
 		}catch(Exception e){
 			return null;
 		}
+		System.out.println(user.toString());
 		return user;	
 	}
 	
@@ -95,6 +96,9 @@ public class UserDaoImpl implements UserDao {
 		
 		if(sc.getUserName()!=null && !sc.getUserName().equals(EMPTY_STRING)){
 			crit.add(Restrictions.like("nameName", sc.getUserName()));
+		}
+		if(sc.getUserIdList()!=null && sc.getUserIdList().size()>0){
+			crit.add(Restrictions.in("userId", sc.getUserIdList()));
 		}
 		if(sc.getPageSize()!= 0){
 			crit.setMaxResults(sc.getPageSize());

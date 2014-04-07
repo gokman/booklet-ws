@@ -10,6 +10,7 @@ public class SearchCriteria {
 	private String writer;
 	private String tag;
 	private List<Long> bookIdList;
+	private List<Long> userIdList;
 	private int pageSize;
 	private int pageNumber;
 	private String orderByCrit;
@@ -18,7 +19,14 @@ public class SearchCriteria {
 	private String userName;
 	private Long followerId;
 	private Long followingId;
+
 	
+	public List<Long> getUserIdList() {
+		return userIdList;
+	}
+	public void setUserIdList(List<Long> userIdList) {
+		this.userIdList = userIdList;
+	}
 	public String getTag() {
 		return tag;
 	}

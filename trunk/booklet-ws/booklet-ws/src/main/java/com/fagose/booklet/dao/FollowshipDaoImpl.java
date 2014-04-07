@@ -77,5 +77,20 @@ public class FollowshipDaoImpl implements FollowshipDao {
         q.executeUpdate();
 		
 	}
+	@Override
+	public List<Followship> listFollowship(SearchCriteria searchCriteria) {
+		Criteria crit =sessionFactory.getCurrentSession().createCriteria(Followship.class);
+		List<Followship> resultList = null;
+		
+		if(searchCriteria.getFollowerId()!=null){
+			crit.add(Expression.eq("followerUserId", searchCriteria.getFollowerId()));
+		}
+		if(searchCriteria.getFollowingId()!=null){
+			crit.add(Expression.eq("followedUserId", searchCriteria.getFollowingId()));
+		}
+		resultList = crit.list();
+		
+		return resultList;
+	}
 
 }
