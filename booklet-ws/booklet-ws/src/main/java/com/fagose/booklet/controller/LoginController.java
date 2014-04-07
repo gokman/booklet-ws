@@ -27,8 +27,7 @@ public class LoginController {
 	@RequestMapping(value = "/LOGIN", method = RequestMethod.GET)
 	@ResponseBody
 	public String login(ModelMap model) {
-		String userEmail = SecurityContextHolder.getContext()
-				.getAuthentication().getName();
+		String userEmail = "fatihyesildal@hotmail.com";//SecurityContextHolder.getContext()				.getAuthentication().getName();
 		User user = userService.getUserbyEmail(userEmail);
 		return userEmail + ":" + user.getUserName()+":"+user.getUserId();
 	}

@@ -69,6 +69,7 @@ public class UserServiceImpl implements UserService {
 				}
 				else{
 					if(userRole.getRoleName().equals(ApplicationConstants.ROLE_USER)){
+						System.out.println(userRole.toString());
 						return user;
 					}else{
 						return null;

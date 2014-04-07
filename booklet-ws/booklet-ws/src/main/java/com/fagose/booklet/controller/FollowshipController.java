@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fagose.booklet.model.Book;
 import com.fagose.booklet.model.Followship;
 import com.fagose.booklet.model.User;
 import com.fagose.booklet.service.FollowshipService;
+import com.fagose.booklet.to.SearchCriteria;
 
 
 @Controller
@@ -60,4 +62,11 @@ public class FollowshipController{
 		followshipService.unFollow(userId, followedId);
 	}
 	
+	@RequestMapping(value = "/LIST_FOLLOWSHIPS",method = RequestMethod.POST)
+	@ResponseBody	
+	public List<Followship> listFollowships(@RequestBody SearchCriteria searchCriteria) {
+		List <Followship> followships = followshipService.listFollowship(searchCriteria);
+		
+		return followships;		
+	}	
 }

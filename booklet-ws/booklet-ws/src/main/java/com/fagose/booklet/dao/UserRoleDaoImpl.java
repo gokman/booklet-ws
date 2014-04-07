@@ -15,7 +15,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
 	@Override
 	public Userroles getUserRolebyUserId(long userId) {
 		Userroles list= (Userroles) sessionFactory.getCurrentSession().createSQLQuery(
-				"select * from userroles where UserID="+userId).addEntity(Userroles.class).uniqueResult();
+				"select * from userroles where UserID=:userId").addEntity(Userroles.class).setParameter("userId", userId).uniqueResult();
 		
 			return list;
 	
