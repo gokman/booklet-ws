@@ -46,5 +46,10 @@ public class BookServiceImpl implements BookService {
 			 			
 		}
 
+		@Override
+		public List<Book> listCommentedBooks(SearchCriteria bookSearchCriteria) {
+            return bookDao.listCommentedBooks(bookSearchCriteria);
+		}
+
 }
 

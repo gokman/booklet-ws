@@ -1,18 +1,22 @@
 package com.fagose.booklet.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fagose.booklet.util.ApplicationUtils;
 import com.fagose.booklet.util.ApplicationUtils.*;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Order;
+import org.hibernate.mapping.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.fagose.booklet.model.Book;
 import com.fagose.booklet.model.BookLike;
+import com.fagose.booklet.model.User;
 import com.fagose.booklet.to.SearchCriteria;
 
 @Repository("bookDao")
@@ -109,4 +113,26 @@ public class BookDaoImpl implements BookDao {
 				
 	}
 
+	@Override
+	public List<Book> listCommentedBooks(SearchCriteria searchCriteria) {
+		Query q = sessionFactory.getCurrentSession().createQuery(
+				"select b.bookId,b.name,b.description,b.adderId,b.writer,b.coverPhoto from Book as b,Comment as cm where b.bookId=cm.commentedBookId and cm.commenterId =:userId");
+	    q.setLong("userId", searchCriteria.getUserId());
+	    @SuppressWarnings("unchecked")
+		List<Object[]> result =  q.list();
+		List<Book> bookList = new ArrayList<Book>();
+	    if(result!=null){
+	    	for(Object[] obj : result){
+	    		Book b = new Book();
+	    		b.setBookId((Long)obj[0]);
+	    		b.setName((String)obj[1]);
+	    		b.setDescription((String)obj[2]);
+	    		b.setAdderId((Long)obj[3]);
+	    		b.setWriter((String)obj[4]);
+	    		b.setCoverPhoto((String)obj[5]);
+	    		bookList.add(b);
+	    	}
+	    }
+	    
+	    return bookList;	}
 }

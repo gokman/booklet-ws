@@ -38,6 +38,15 @@ public class BookController{
 		return bookList;
  
 	}
+	@RequestMapping(value="/LIST_COMMENTED_BOOKS/{userId}", method = RequestMethod.GET)
+	public @ResponseBody List<Book> listCommentedBooks(@PathVariable Long userId) throws IOException {
+ 
+		SearchCriteria searchCriteria= new SearchCriteria();
+		searchCriteria.setUserId(userId);
+		List<Book> bookList = bookService.listCommentedBooks(searchCriteria);
+		return bookList;
+ 
+	}
 	@RequestMapping(value="/GET_BY_ID/{bookId}", method = RequestMethod.GET)
 	public @ResponseBody Book getBookById(@PathVariable Long bookId) throws IOException {
  

@@ -11,6 +11,7 @@ public interface BookService {
         public void addBook(Book book);
         public void deleteBook(Book book);
         public List<Book> listBook(SearchCriteria bookSearchCriteria);
+        public List<Book> listCommentedBooks(SearchCriteria bookSearchCriteria);
         public Book getBookById(Long bookId);
         public List<BookLike> listBookLike(SearchCriteria searchCriteria);
         public long countBookByUserId(Long bookId);
