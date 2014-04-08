@@ -10,6 +10,7 @@ public interface BookDao {
 		public void saveBook( Book book);
 		public void deleteBook( Book book);
         public List<Book> listBook(SearchCriteria searchCriteria);
+        public List<Book> listCommentedBooks(SearchCriteria searchCriteria);
         public Book getBookById(Long bookId);
         public List<BookLike> listBookLike(SearchCriteria searchCriteria);
         public long countBookByUserId(long userId);
