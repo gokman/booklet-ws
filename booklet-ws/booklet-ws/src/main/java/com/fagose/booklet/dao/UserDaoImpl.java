@@ -67,7 +67,6 @@ public class UserDaoImpl implements UserDao {
 		}catch(Exception e){
 			return null;
 		}
-		System.out.println(user.toString());
 		return user;	
 	}
 	
