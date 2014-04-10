@@ -57,8 +57,8 @@ public class UserController{
 	public String sendPasswordResetToken(@RequestBody String email)  {
 		
 		BigInteger token=new BigInteger(25, new SecureRandom());
-		
-		User user=userService.getUserbyEmail(ApplicationUtils.getJsonValue(email, "email"));
+		String localEmail=ApplicationUtils.getJsonValue(email, "email");
+		User user=userService.getUserbyEmail(localEmail);
 		
 		//isleme baslamadan once passwordreset tablosunda kayit kaldi ise onu sil
 		PasswordReset passReset=passwordResetService.findRecordByUserId(user.getUserId());
@@ -89,7 +89,7 @@ public class UserController{
 	@ResponseBody	
 	public String resetPassword(@RequestBody CustomResetPassword object) {
 		//get user by email
-		User user=userService.getUserbyEmail("'"+object.getEmail()+"'");
+		User user=userService.getUserbyEmail(object.getEmail());
 		//control password reset table with user id
 		PasswordReset passReset=passwordResetService.isPasswordResetExist(user.getUserId(),
 				object.getToken());
@@ -107,7 +107,7 @@ public class UserController{
 	@ResponseBody	
 	public boolean isUserExist(@RequestBody User user) {
 		//get user by email
-		User userLocal=userService.getUserbyEmail("'"+user.getUserEmail()+"'");
+		User userLocal=userService.getUserbyEmail(user.getUserEmail());
 		//control password reset table with user id
 		if(userLocal==null){
 			return false;
