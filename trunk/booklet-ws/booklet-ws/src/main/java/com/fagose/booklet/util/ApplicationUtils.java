@@ -17,7 +17,7 @@ public class ApplicationUtils {
 	     JsonObject obj = (JsonObject)parser.parse(val);
 	     JsonElement value = obj.get(key);
 	     
-	     return value.toString();
+	     return value.getAsString();
 	}
 	
 }
