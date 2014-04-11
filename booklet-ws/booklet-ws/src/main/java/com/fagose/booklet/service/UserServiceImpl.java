@@ -82,7 +82,11 @@ public class UserServiceImpl implements UserService {
 		public void insertUser(User user) {
 			userDao.insertUser(user);
 		}
-        public List<User> listUsers(SearchCriteria searchCriteria) {
+		@Override
+		public void updateUser(User user) {
+			userDao.updateUser(user);
+		}
+		public List<User> listUsers(SearchCriteria searchCriteria) {
             return userDao.listUsers(searchCriteria);
     }
 

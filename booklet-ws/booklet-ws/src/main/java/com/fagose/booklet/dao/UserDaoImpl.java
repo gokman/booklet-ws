@@ -78,7 +78,29 @@ public class UserDaoImpl implements UserDao {
 		final Transaction transaction=session.beginTransaction();
 		
 		try{
-			session.save(user);
+			session.saveOrUpdate(user);
+			transaction.commit();
+		}catch(Exception e){
+			transaction.rollback();
+		}
+		
+		session.close();
+		
+	}
+	@Override
+	public void updateUser(final User user) {
+		
+		final Session session=sessionFactory.openSession();
+		final Transaction transaction=session.beginTransaction();
+		
+		try{
+			SearchCriteria sc = new SearchCriteria();
+			sc.setUserId(user.getUserId());
+			List<User> users = listUsers(sc);
+			User userToUpdate = users.get(0);
+			userToUpdate.setAbout(user.getAbout());
+			userToUpdate.setUserName(user.getUserName());
+			session.update(userToUpdate);
 			transaction.commit();
 		}catch(Exception e){
 			transaction.rollback();
@@ -94,10 +116,12 @@ public class UserDaoImpl implements UserDao {
 		
 		
 		if(sc.getUserName()!=null && !sc.getUserName().equals(EMPTY_STRING)){
-			crit.add(Restrictions.like("nameName", sc.getUserName()));
+			crit.add(Restrictions.like("UserName", sc.getUserName()));
 		}
 		if(sc.getUserIdList()!=null && sc.getUserIdList().size()>0){
 			crit.add(Restrictions.in("userId", sc.getUserIdList()));
+		}else if(sc.getUserId() !=null && !sc.getUserId().equals(ApplicationUtils.EMPTY_STRING)){
+			crit.add(Restrictions.eq("userId", sc.getUserId()));
 		}
 		if(sc.getPageSize()!= 0){
 			crit.setMaxResults(sc.getPageSize());
