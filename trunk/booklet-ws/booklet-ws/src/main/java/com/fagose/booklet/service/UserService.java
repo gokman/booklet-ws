@@ -10,6 +10,7 @@ public interface UserService {
         public User getUserRole(String username,String password);
         public User getUserbyEmail(String email);
         public void insertUser(User user);
+        public void updateUser(User user);
         public List<User> listUsers(SearchCriteria sc);
         public User getUserbyUserName(String userName);
         public void saveUserRole(User user,String role);

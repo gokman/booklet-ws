@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class ApplicationUtils {
+	public static final String EMPTY_STRING  = "";
 	public static final String ORDER_BY_DIRECTION_ASCENDING  ="ASC";
 	public static final String ORDER_BY_DIRECTION_DESCENDING ="DESC";
 	public final static SimpleDateFormat dateFormat=new SimpleDateFormat("hh:mm dd-MM-yyyy");

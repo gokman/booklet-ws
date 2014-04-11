@@ -10,6 +10,7 @@ public interface UserDao {
 		public User getUserbyUsernamePassword(String username,String password);
 		public User getUserbyEmail(String email);
 		public void insertUser(final User user);
+		public void updateUser(final User user);
 		public List<User> listUsers(SearchCriteria sc);
 		public User getUserbyUserName(String userName);
 		public void activateUser(User user);

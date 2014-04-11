@@ -115,5 +115,16 @@ public class UserController{
 			return true;
 		}
 	}
+	@RequestMapping(value = "/UPDATE", method = RequestMethod.POST)
+	@ResponseBody
+	public String register(@RequestBody User user) {
+
+		try {
+			userService.updateUser(user);
+		} catch (Exception e) {
+			return e.toString();
+		}
+		return "success";
+	}	
 	
 }
