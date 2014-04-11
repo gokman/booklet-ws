@@ -3,6 +3,7 @@ package com.fagose.booklet.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Order;
@@ -50,6 +51,16 @@ public class ActionDaoImpl implements ActionDao {
 		
 		return resultList; 
 
+	}
+	@Override
+	public void deleteAction(Long userId, Long detailId) {
+		Query q = sessionFactory.getCurrentSession().createQuery("delete from Action where userId = :userId "
+				+ "and actionDetailId = :actionDetailId ");
+        q.setLong("userId", userId);
+        q.setLong("actionDetailId", detailId);
+        q.executeUpdate();
+			
+		
 	}
 
 }

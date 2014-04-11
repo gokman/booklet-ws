@@ -58,7 +58,7 @@ public class FollowshipController{
 		return followingUserList;
 	}
 	@RequestMapping(value="/UNFOLLOW/{userId}/{followedId}", method = RequestMethod.DELETE)
-	public void getFollowingList(@PathVariable Long userId,@PathVariable Long followedId) throws IOException {
+	public void unfollow(@PathVariable Long userId,@PathVariable Long followedId) throws IOException {
 		followshipService.unFollow(userId, followedId);
 	}
 	
