@@ -28,7 +28,12 @@ public class ActionServiceImpl implements ActionService {
         }
         public List<Action> listAction(SearchCriteria searchCriteria) {
             return actionDao.listAction(searchCriteria);
-    }        
+    }
+
+		@Override
+		public void deleteAction(Long userId, Long detailId) {
+			actionDao.deleteAction(userId,detailId);
+		}        
 
 }
 

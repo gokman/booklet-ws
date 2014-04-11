@@ -9,5 +9,6 @@ public interface ActionService {
 
         public void addAction(Action action);
         public List<Action> listAction(SearchCriteria bookSearchCriteria);
+        public void deleteAction(Long userId,Long  detailId);
 }
 

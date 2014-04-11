@@ -8,6 +8,7 @@ import com.fagose.booklet.to.SearchCriteria;
 public interface ActionDao {
 		public void saveAction( Action action);
 		public List<Action> listAction(SearchCriteria searchCriteria);
+		public void deleteAction(Long userId,Long detailId);
 }
 
 
