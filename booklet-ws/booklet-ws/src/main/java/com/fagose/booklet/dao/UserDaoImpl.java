@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao {
 		try{
 		
 		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(
-				"SELECT * FROM User WHERE UserEmail="+"'"+":email"+"'"+" AND Password="+"'"+":password"+"'").
+				"SELECT * FROM User WHERE UserEmail=:email AND Password=:password").
 				addEntity(User.class);
 		user=(User)query.setParameter("email", email).
 				         setParameter("password", password).
