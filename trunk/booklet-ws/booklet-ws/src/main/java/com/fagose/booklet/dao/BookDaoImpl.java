@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fagose.booklet.util.ApplicationUtils;
 import com.fagose.booklet.util.ApplicationUtils.*;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import com.fagose.booklet.model.Book;
 import com.fagose.booklet.model.BookLike;
 import com.fagose.booklet.model.User;
+import com.fagose.booklet.object.CustomBook;
 import com.fagose.booklet.to.SearchCriteria;
 
 @Repository("bookDao")
@@ -134,5 +136,45 @@ public class BookDaoImpl implements BookDao {
 	    	}
 	    }
 	    
-	    return bookList;	}
+	    return bookList;	
+	    }
+
+	@Override
+	public List<CustomBook> listCustomBook(List<Book> listBook) {
+		String bookAdderIDs="";
+		int counter=0;
+		
+		for(Book book:listBook){
+			if(counter==0){
+				bookAdderIDs=""+book.getAdderId();
+			}else{
+				bookAdderIDs=bookAdderIDs+","+book.getAdderId();
+			}
+			counter++;
+		}
+		
+		Query  q=sessionFactory.getCurrentSession().createQuery("select "
+				                                              + "b.bookId,b.name,b.description,b.adderId,"
+				                                              + "b.writer,b.coverPhoto,u.userName "
+				                                              + "from User u,Book b "
+				                                              + "where u.userId=b.adderId and b.adderId in ("+bookAdderIDs+")");
+		
+		@SuppressWarnings("unchecked")
+		List<Object[]> result=q.list();
+		List<CustomBook> customBookList = new ArrayList<CustomBook>();
+	    if(result!=null){
+	    	for(Object[] obj : result){
+	    		CustomBook b = new CustomBook();
+	    		b.setBookId((Long)obj[0]);
+	    		b.setName((String)obj[1]);
+	    		b.setDescription((String)obj[2]);
+	    		b.setAdderId((Long)obj[3]);
+	    		b.setWriter((String)obj[4]);
+	    		b.setCoverPhoto((String)obj[5]);
+	    		b.setAdderName((String)obj[6]);
+	    		customBookList.add(b);
+	    	}
+	    }
+		return customBookList;
+	}
 }
