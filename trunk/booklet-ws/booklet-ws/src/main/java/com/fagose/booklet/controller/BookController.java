@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fagose.booklet.model.Book;
 import com.fagose.booklet.model.BookLike;
+import com.fagose.booklet.object.CustomBook;
 import com.fagose.booklet.service.BookService;
 import com.fagose.booklet.to.SearchCriteria;
 import com.google.gson.Gson;
@@ -72,6 +73,14 @@ public class BookController{
 		List <Book> books = bookService.listBook(searchCriteria);
 		
 		return books;		
+	}	
+	
+	@RequestMapping(value = "/CUSTOMLIST",method = RequestMethod.POST)
+	@ResponseBody	
+	public List<CustomBook> listCustomBooks(@RequestBody SearchCriteria searchCriteria) {
+		List <Book> books = bookService.listBook(searchCriteria);
+		List<CustomBook> customBooks=bookService.listCustomBook(books);
+		return customBooks;		
 	}	
 
 	@RequestMapping(value = "/ADD", method = RequestMethod.POST)
