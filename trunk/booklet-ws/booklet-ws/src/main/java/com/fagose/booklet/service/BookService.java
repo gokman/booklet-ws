@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fagose.booklet.model.Book;
 import com.fagose.booklet.model.BookLike;
+import com.fagose.booklet.object.CustomBook;
 import com.fagose.booklet.to.SearchCriteria;
 
 public interface BookService {
@@ -15,5 +16,6 @@ public interface BookService {
         public Book getBookById(Long bookId);
         public List<BookLike> listBookLike(SearchCriteria searchCriteria);
         public long countBookByUserId(Long bookId);
+        public List<CustomBook> listCustomBook(List<Book> bookList);
 }
 

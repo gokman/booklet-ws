@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fagose.booklet.dao.BookDao;
 import com.fagose.booklet.model.Book;
 import com.fagose.booklet.model.BookLike;
+import com.fagose.booklet.object.CustomBook;
 import com.fagose.booklet.to.SearchCriteria;
 
 @Service("bookService")
@@ -49,6 +50,11 @@ public class BookServiceImpl implements BookService {
 		@Override
 		public List<Book> listCommentedBooks(SearchCriteria bookSearchCriteria) {
             return bookDao.listCommentedBooks(bookSearchCriteria);
+		}
+
+		@Override
+		public List<CustomBook> listCustomBook(List<Book> bookList) {
+			return bookDao.listCustomBook(bookList);
 		}
 
 }
