@@ -21,15 +21,18 @@ public class BookLikeDaoImpl implements BookLikeDao {
 
 	
 	@Override
-	public void saveBookLike(BookLike comment) {
-		sessionFactory.getCurrentSession().save(comment);
+	public void saveBookLike(BookLike bookLike) {
+		sessionFactory.getCurrentSession().save(bookLike);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<BookLike> listBookLikes(SearchCriteria searchriteria) {
-		Criteria crit =sessionFactory.getCurrentSession().createCriteria(Comment.class);
+		Criteria crit =sessionFactory.getCurrentSession().createCriteria(BookLike.class);
 		List<BookLike> resultList = null;
 		
+		if(searchriteria.getBookId()!=null){
+			crit.add(Expression.eq("bookId", searchriteria.getBookId()));
+		}
 		resultList = crit.list();
 		
 		return resultList; 
@@ -46,5 +49,13 @@ public class BookLikeDaoImpl implements BookLikeDao {
 				          createQuery("from BookLike where bookLikeId="+id).
 				          uniqueResult();
 		
+	}
+
+	@Override
+	public BookLike getByIdAndLikerId(Long bookId, Long likerId) {
+		return (BookLike)sessionFactory.
+		          getCurrentSession().
+		          createQuery("from BookLike where bookId="+bookId+" and bookLikerId="+likerId).
+		          uniqueResult();
 	}
 }

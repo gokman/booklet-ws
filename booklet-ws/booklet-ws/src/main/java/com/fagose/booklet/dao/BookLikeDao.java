@@ -11,6 +11,7 @@ public interface BookLikeDao {
 		public void deleteBookLike( BookLike bookLike);
         public List<BookLike> listBookLikes(SearchCriteria searchCriteria);
         public BookLike getBookLikeById(Long id);
+        public BookLike getByIdAndLikerId(Long bookId,Long likerId);
 }
 
 
