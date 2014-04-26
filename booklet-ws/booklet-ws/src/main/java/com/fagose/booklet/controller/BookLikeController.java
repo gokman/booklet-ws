@@ -27,6 +27,7 @@ public class BookLikeController{
 	@RequestMapping(value = "/ADD", method = RequestMethod.POST)
 	@ResponseBody
 	public BookLike addBookLike(@RequestBody BookLike bookLike) {
+		
 		bookLikeService.addBookLike(bookLike);
 		return bookLike;
 	}	  
@@ -38,7 +39,7 @@ public class BookLikeController{
 		return bookLikes;		
 	}
 	
-	@RequestMapping(value = "/DELETE", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/DELETE", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteBookLike(@RequestBody BookLike bookLike) {
 		bookLikeService.deleteBookLike(bookLike);
