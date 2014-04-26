@@ -1,5 +1,7 @@
 package com.fagose.booklet.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +32,21 @@ public class BookLikeServiceImpl implements BookLikeService {
 		return bookLikeDao.listBookLikes(searchCriteria);
 	}
 
-	@Override
+	@Transactional
 	public void deleteBookLike(BookLike bookLike) {
-		bookLikeDao.deleteBookLike(bookLike);
+		BookLike bookLikeObject=bookLikeDao.getByIdAndLikerId(bookLike.getBookId(),bookLike.getBookLikerId());
+		bookLikeDao.deleteBookLike(bookLikeObject);
 	}
 
 	@Override
 	public BookLike getBookLikeById(Long id) {
 		// TODO Auto-generated method stub
 		return bookLikeDao.getBookLikeById(id);
+	}
+
+	@Override
+	public BookLike getByIdAndLiker(Long bookId, Long bookLikerId) {
+		
+		return bookLikeDao.getByIdAndLikerId(bookId,bookLikerId);
 	}
 }
