@@ -56,7 +56,8 @@ public class BookController{
  
 	}	
 	@RequestMapping(value="/LIST_LIKES/{adderId}/{bookId}", method = RequestMethod.GET)
-	public @ResponseBody List<BookLike> getBookLikes(@PathVariable Long adderId,Long bookId) throws IOException {
+	@ResponseBody
+	public List<BookLike> getBookLikes(@PathVariable("adderId") Long adderId,@PathVariable("bookId") Long bookId) throws IOException {
  
 		SearchCriteria searchCriteria= new SearchCriteria();
 		searchCriteria.setBookId(bookId);
