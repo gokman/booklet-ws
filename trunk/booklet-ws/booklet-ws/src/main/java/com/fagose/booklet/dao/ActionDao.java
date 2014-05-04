@@ -9,6 +9,7 @@ public interface ActionDao {
 		public void saveAction( Action action);
 		public List<Action> listAction(SearchCriteria searchCriteria);
 		public void deleteAction(Long userId,Long detailId);
+		public Action findByUserAndActionDetailID(Long UserID,Long ActionDetailID);
 }
 
 

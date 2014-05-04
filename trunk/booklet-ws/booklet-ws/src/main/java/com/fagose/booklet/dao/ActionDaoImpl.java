@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fagose.booklet.model.Action;
 import com.fagose.booklet.model.Book;
+import com.fagose.booklet.model.BookLike;
 import com.fagose.booklet.to.SearchCriteria;
 import com.fagose.booklet.util.ApplicationUtils;
 
@@ -60,6 +61,15 @@ public class ActionDaoImpl implements ActionDao {
         q.setLong("actionDetailId", detailId);
         q.executeUpdate();
 			
+		
+	}
+	@Override
+	public Action findByUserAndActionDetailID(Long userId, Long actionDetailId) {
+		return (Action)sessionFactory.
+                        getCurrentSession().
+                        createQuery("from Action where userId="+userId+
+        		                    " and actionDetailId="+actionDetailId).
+                                                            uniqueResult();
 		
 	}
 
