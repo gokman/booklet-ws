@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fagose.booklet.dao.ActionDao;
 import com.fagose.booklet.dao.BookLikeDao;
+import com.fagose.booklet.model.Action;
+import com.fagose.booklet.model.ActionType;
 import com.fagose.booklet.model.BookLike;
 import com.fagose.booklet.to.SearchCriteria;
 
@@ -19,6 +22,9 @@ public class BookLikeServiceImpl implements BookLikeService {
 
 	@Autowired
 	private BookLikeDao bookLikeDao;
+	
+	@Autowired
+	private ActionDao actionDao;
 
 	public BookLikeServiceImpl() {
 	}
@@ -26,6 +32,13 @@ public class BookLikeServiceImpl implements BookLikeService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void addBookLike(BookLike bookLike) {
 		bookLikeDao.saveBookLike(bookLike);
+		BookLike savedBookLike=bookLikeDao.getByIdAndLikerId(bookLike.getBookId(),bookLike.getBookLikerId());
+		Action action=new Action();
+		action.setActionType((long)ActionType.ADD_BOOKLIKE.asCode());
+		action.setUserId(savedBookLike.getBookLikerId());
+		action.setActionDate(savedBookLike.getBookLikeDate());
+		action.setActionDetailId(savedBookLike.getBookLikeId());
+		actionDao.saveAction(action);
 	}
 
 	public List<BookLike> listBookLikes(SearchCriteria searchCriteria) {
@@ -36,6 +49,7 @@ public class BookLikeServiceImpl implements BookLikeService {
 	public void deleteBookLike(BookLike bookLike) {
 		BookLike bookLikeObject=bookLikeDao.getByIdAndLikerId(bookLike.getBookId(),bookLike.getBookLikerId());
 		bookLikeDao.deleteBookLike(bookLikeObject);
+		actionDao.deleteAction(bookLikeObject.getBookLikerId(), bookLikeObject.getBookLikeId());
 	}
 
 	@Override
