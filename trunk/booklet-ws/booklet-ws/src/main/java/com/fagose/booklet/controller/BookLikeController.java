@@ -1,4 +1,5 @@
 package com.fagose.booklet.controller;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fagose.booklet.model.Action;
+import com.fagose.booklet.model.ActionType;
 import com.fagose.booklet.model.BookLike;
+import com.fagose.booklet.service.ActionService;
 import com.fagose.booklet.service.BookLikeService;
 import com.fagose.booklet.to.SearchCriteria;
 
@@ -23,6 +27,9 @@ public class BookLikeController{
 
 	@Autowired
 	private BookLikeService bookLikeService;
+	
+	@Autowired
+	private ActionService actionService;
 	
 	@RequestMapping(value = "/ADD", method = RequestMethod.POST)
 	@ResponseBody
