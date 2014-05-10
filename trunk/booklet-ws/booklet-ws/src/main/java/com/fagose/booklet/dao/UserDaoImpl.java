@@ -185,4 +185,19 @@ public class UserDaoImpl implements UserDao {
 		
 	}
 
+
+	@Override
+	public User getUserbyUserId(Long id) {
+		
+        User user=null;
+		
+		SQLQuery query=sessionFactory.getCurrentSession().createSQLQuery(
+				"SELECT * FROM User WHERE UserID=:id").
+				addEntity(User.class);
+		
+		user=(User)query.setParameter("id", id).uniqueResult();
+		
+		return user;
+	}
+
 }

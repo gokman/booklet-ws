@@ -16,6 +16,7 @@ public interface UserDao {
 		public void activateUser(User user);
 		public String getUserPassword(String email);
 		public void updatePassword(long userId,String password);
+		public User getUserbyUserId(Long id);
 }
 
 
