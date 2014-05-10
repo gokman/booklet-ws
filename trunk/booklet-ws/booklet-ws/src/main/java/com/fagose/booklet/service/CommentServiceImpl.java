@@ -1,5 +1,6 @@
 package com.fagose.booklet.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fagose.booklet.dao.CommentDao;
+import com.fagose.booklet.dao.UserDao;
 import com.fagose.booklet.model.Comment;
+import com.fagose.booklet.model.User;
+import com.fagose.booklet.object.CustomComment;
 import com.fagose.booklet.to.SearchCriteria;
 
 @Service("commentService")
@@ -17,6 +21,9 @@ public class CommentServiceImpl implements CommentService {
 
 	@Autowired
 	private CommentDao commentDao;
+	
+	@Autowired
+	private UserDao userDao;
 
 	public CommentServiceImpl() {
 	}
@@ -26,8 +33,15 @@ public class CommentServiceImpl implements CommentService {
 		commentDao.saveComment(comment);
 	}
 
-	public List<Comment> listComments(SearchCriteria searchCriteria) {
-		return commentDao.listComments(searchCriteria);
+	public List<CustomComment> listCustomComments(SearchCriteria searchCriteria) {
+		List<Comment> comments=commentDao.listComments(searchCriteria);
+		List<CustomComment> customComments=new ArrayList<CustomComment>();
+		User user=new User();
+		for(Comment comment:comments){
+			user=userDao.getUserbyUserId(comment.getCommenterId());
+			customComments.add(new CustomComment(comment, user.getUserName()));
+		}
+		return customComments;
 	}
 
 	@Override
