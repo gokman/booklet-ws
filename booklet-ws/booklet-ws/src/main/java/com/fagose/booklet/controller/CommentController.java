@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fagose.booklet.model.Book;
 import com.fagose.booklet.model.BookLike;
 import com.fagose.booklet.model.Comment;
+import com.fagose.booklet.object.CustomComment;
 import com.fagose.booklet.service.CommentService;
 import com.fagose.booklet.to.SearchCriteria;
 
@@ -29,11 +30,11 @@ public class CommentController{
 	private CommentService commentService;
 	
 	@RequestMapping(value="/LIST_COMMENTS/{bookId}", method = RequestMethod.GET)
-	public @ResponseBody List<Comment> getBookComments(@PathVariable Long bookId) throws IOException {
+	public @ResponseBody List<CustomComment> getBookComments(@PathVariable Long bookId) throws IOException {
  
 		SearchCriteria searchCriteria= new SearchCriteria();
 		searchCriteria.setBookId(bookId);
-		List<Comment> commentList = commentService.listComments(searchCriteria);
+		List<CustomComment> commentList = commentService.listCustomComments(searchCriteria);
 		return commentList;
  
 	}
