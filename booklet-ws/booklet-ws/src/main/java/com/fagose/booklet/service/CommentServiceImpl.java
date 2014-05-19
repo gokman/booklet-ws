@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fagose.booklet.dao.ActionDao;
 import com.fagose.booklet.dao.CommentDao;
 import com.fagose.booklet.dao.UserDao;
+import com.fagose.booklet.model.Action;
+import com.fagose.booklet.model.ActionType;
+import com.fagose.booklet.model.BookLike;
 import com.fagose.booklet.model.Comment;
 import com.fagose.booklet.model.User;
 import com.fagose.booklet.object.CustomComment;
@@ -23,6 +27,9 @@ public class CommentServiceImpl implements CommentService {
 	private CommentDao commentDao;
 	
 	@Autowired
+	private ActionDao actionDao;
+	
+	@Autowired
 	private UserDao userDao;
 
 	public CommentServiceImpl() {
@@ -31,6 +38,13 @@ public class CommentServiceImpl implements CommentService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void addComment(Comment comment) {
 		commentDao.saveComment(comment);
+		Comment savedComment=commentDao.getByCommentId(comment.getCommentId());
+		Action action=new Action();
+		action.setActionType((long)ActionType.ADD_COMMENT.asCode());
+		action.setUserId(savedComment.getCommenterId());
+		action.setActionDate(savedComment.getCreationDate());
+		action.setActionDetailId(savedComment.getCommentId());
+		actionDao.saveAction(action);
 	}
 
 	public List<CustomComment> listCustomComments(SearchCriteria searchCriteria) {
@@ -44,9 +58,14 @@ public class CommentServiceImpl implements CommentService {
 		return customComments;
 	}
 
-	@Override
+	@Transactional
 	public void deleteComment(Comment comment) {
-		commentDao.deleteComment(comment);
+		/*eger elimizdeki comment nesnesinin tüm degiskenleri yok ise garanti olmasi icin
+		comment id ile comment nesnesini tam çekip silme işlemine devam edilebilir */
+		Comment comment2=commentDao.getByCommentId(comment.getCommentId());
+		commentDao.deleteComment(comment2);
+		actionDao.deleteAction(comment2.getCommenterId(), comment2.getCommentId());
+		
 	}
 	public Comment getByCommentId(Long commentId){
 		Comment comment = commentDao.getByCommentId(commentId);
