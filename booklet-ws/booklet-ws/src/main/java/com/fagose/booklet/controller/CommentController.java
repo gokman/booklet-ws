@@ -55,10 +55,11 @@ public class CommentController{
 		return comment;
  
 	}
-	@RequestMapping(value = "/delete")
-	public void delete(HttpServletRequest req,@ModelAttribute("comment")Comment comment,BindingResult result) {
+	@RequestMapping(value = "/DELETE")
+	@ResponseBody
+	public void delete(@RequestBody Comment comment) {
 		commentService.deleteComment(comment);
-	}	
+	}
 	
 	@RequestMapping(value="/LIST_USER_COMMENTS/{adderId}", method = RequestMethod.GET)
 	public @ResponseBody List<Comment> getUserComments(@PathVariable Long adderId) throws IOException {
