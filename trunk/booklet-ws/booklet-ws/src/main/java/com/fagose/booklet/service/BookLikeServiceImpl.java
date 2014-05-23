@@ -34,7 +34,7 @@ public class BookLikeServiceImpl implements BookLikeService {
 		bookLikeDao.saveBookLike(bookLike);
 		BookLike savedBookLike=bookLikeDao.getByIdAndLikerId(bookLike.getBookId(),bookLike.getBookLikerId());
 		Action action=new Action();
-		action.setActionType((long)ActionType.ADD_BOOKLIKE.asCode());
+		action.setActionType(ActionType.ADD_BOOKLIKE.asCode());
 		action.setUserId(savedBookLike.getBookLikerId());
 		action.setActionDate(savedBookLike.getBookLikeDate());
 		action.setActionDetailId(savedBookLike.getBookLikeId());

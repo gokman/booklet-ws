@@ -40,7 +40,7 @@ public class CommentServiceImpl implements CommentService {
 		commentDao.saveComment(comment);
 		Comment savedComment=commentDao.getByCommentId(comment.getCommentId());
 		Action action=new Action();
-		action.setActionType((long)ActionType.ADD_COMMENT.asCode());
+		action.setActionType(ActionType.ADD_COMMENT.asCode());
 		action.setUserId(savedComment.getCommenterId());
 		action.setActionDate(savedComment.getCreationDate());
 		action.setActionDetailId(savedComment.getCommentId());
