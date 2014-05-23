@@ -29,7 +29,7 @@ import com.fagose.booklet.util.CustomJsonDateDeserializer;
 @Table(name = "Action", catalog = "booklet")
 public class Action implements java.io.Serializable {
 
-	private Long actionType;
+	private int actionType;
 	private Long userId;
 	private Long actionId;
 	private Date actionDate;
@@ -41,7 +41,7 @@ public class Action implements java.io.Serializable {
 
 
 	public Action(
-			Long actionType,
+			int actionType,
 			Long userId, Long actionId) {
 		this.actionType = actionType;
 		this.userId = userId;
@@ -49,12 +49,12 @@ public class Action implements java.io.Serializable {
 	}
 
 	@Column(name = "ActionType")
-	public Long getActionType() {
+	public int getActionType() {
 		return actionType;
 	}
 
 
-	public void setActionType(Long actionType) {
+	public void setActionType(int actionType) {
 		this.actionType = actionType;
 	}
 
