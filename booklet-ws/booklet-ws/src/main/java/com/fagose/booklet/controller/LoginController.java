@@ -37,16 +37,24 @@ public class LoginController {
 	public String register(@RequestBody User user) {
 		// kullanıcıya etkinleştirme maili gönderilecek ve enabled 0 atanacak
 		// cevap gelirse enable 1 olacak
-		String activationToken = "";
-		try {
-			activationToken = MailSender.sendActivationEmail(user,
-					"http://localhost:8080/booklet-ws/services/User/activateUserAccount/"
-							+ user.getUserName());
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		
+		//facebook kullanıcısı ile giriş yapmazsa bu mail atma olayını yap
+		if(user.getLoginPlatform()==0){
+			
+			String activationToken = "";
+			try {
+				activationToken = MailSender.sendActivationEmail(user,
+						"http://localhost:8080/booklet-ws/services/User/activateUserAccount/"
+								+ user.getUserName());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			 user.setActivationToken(activationToken);
+		}else if(user.getLoginPlatform()==1){
+			user.setActivationToken("xxx");
 		}
-		user.setActivationToken(activationToken);
+		
 		user.setCreationDate(new java.sql.Date(ApplicationUtils.dateFormat
 				.getCalendar().getTime().getTime()));
 		user.setLastUpdateDate(new java.sql.Date(ApplicationUtils.dateFormat
