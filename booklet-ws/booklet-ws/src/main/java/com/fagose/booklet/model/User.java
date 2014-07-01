@@ -37,6 +37,7 @@ public class User{
 	private Date creationDate;
 	private Date lastUpdateDate;
 	private Integer enabled;
+	private Integer loginPlatform;
 	
 	
 	@Id
@@ -90,6 +91,18 @@ public class User{
 		this.about = about;
 		this.creationDate = creationDate;
 		this.lastUpdateDate = lastUpdateDate;
+	}
+	
+	public User(Long id, String userName, String password, String about,
+			Date creationDate, Date lastUpdateDate,String userEmail,Integer loginPlatform) {
+		this.userId = id;
+		this.userEmail=userEmail;
+		this.userName = userName;
+		this.password = password;
+		this.about = about;
+		this.creationDate = creationDate;
+		this.lastUpdateDate = lastUpdateDate;
+		this.loginPlatform=loginPlatform;
 	}
 
 
@@ -148,6 +161,15 @@ public class User{
 		this.lastUpdateDate = lastUpdateDate;
 	}
 	
+	@Column(name = "LoginPlatform")
+	public Integer getLoginPlatform() {
+		return loginPlatform;
+	}
+
+	public void setLoginPlatform(Integer loginPlatform) {
+		this.loginPlatform = loginPlatform;
+	}
+
 	@Column(name = "Enabled")
 	public Integer getEnabled() {
 		return this.enabled;
@@ -156,5 +178,5 @@ public class User{
 	public void setEnabled(Integer enabled) {
 		this.enabled = enabled;
 	}
-
+	
 }
