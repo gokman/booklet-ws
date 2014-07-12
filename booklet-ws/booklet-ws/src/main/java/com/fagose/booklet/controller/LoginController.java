@@ -35,6 +35,12 @@ public class LoginController {
 	@RequestMapping(value = "/REGISTER", method = RequestMethod.POST)
 	@ResponseBody
 	public String register(@RequestBody User user) {
+		
+		user.setCreationDate(new java.sql.Date(ApplicationUtils.dateFormat
+				.getCalendar().getTime().getTime()));
+		user.setLastUpdateDate(new java.sql.Date(ApplicationUtils.dateFormat
+				.getCalendar().getTime().getTime()));
+		
 		// kullanıcıya etkinleştirme maili gönderilecek ve enabled 0 atanacak
 		// cevap gelirse enable 1 olacak
 		
@@ -47,23 +53,28 @@ public class LoginController {
 						"http://localhost:8080/booklet-ws/services/User/activateUserAccount/"
 								+ user.getUserName());
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			 user.setActivationToken(activationToken);
+			     user.setActivationToken(activationToken);
+			 
+					 try {
+							userService.insertUser(user);
+					 } catch (Exception e) {
+							return e.toString();
+					 }
+			 
 		}else if(user.getLoginPlatform()==1){
+			
 			user.setActivationToken("xxx");
+			user.setEnabled(1);
+				try {
+					userService.insertFacebookUser(user, ApplicationConstants.ROLE_USER);
+				} catch (Exception e) {
+						return e.toString();
+				}
 		}
 		
-		user.setCreationDate(new java.sql.Date(ApplicationUtils.dateFormat
-				.getCalendar().getTime().getTime()));
-		user.setLastUpdateDate(new java.sql.Date(ApplicationUtils.dateFormat
-				.getCalendar().getTime().getTime()));
-		try {
-			userService.insertUser(user);
-		} catch (Exception e) {
-			return e.toString();
-		}
+		
 		return "success";
 	}
 	
