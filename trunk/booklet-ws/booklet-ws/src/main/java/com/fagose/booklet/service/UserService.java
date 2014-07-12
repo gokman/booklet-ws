@@ -10,6 +10,7 @@ public interface UserService {
         public User getUserRole(String username,String password);
         public User getUserbyEmail(String email);
         public void insertUser(User user);
+        public void insertFacebookUser(User user,String role);
         public void updateUser(User user);
         public List<User> listUsers(SearchCriteria sc);
         public User getUserbyUserName(String userName);

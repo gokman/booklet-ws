@@ -119,4 +119,11 @@ public class UserServiceImpl implements UserService {
 			
 		}
 
+		@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+		public void insertFacebookUser(User user,String role) {
+			
+			userDao.insertUser(user);
+			userRoleDao.saveUserRole(user, role);
+		}
+
 }
